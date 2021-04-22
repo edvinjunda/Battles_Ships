@@ -10,6 +10,8 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
+#include "Entity.h"
+#include "Field.h"
 
 int main()
 {
