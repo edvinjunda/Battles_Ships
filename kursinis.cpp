@@ -16,6 +16,15 @@
 int main()
 {
 
+	Field laukas;
+
+	for (int i = 0; i < 10; i++)
+	{
+		system("cls");
+		laukas.ShowLaukas();
+		Sleep(2000);
+	}
+	return 0;
 }
 
 

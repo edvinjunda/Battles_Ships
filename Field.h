@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <iomanip>
 #include <Windows.h>
@@ -30,9 +30,10 @@ Field::~Field(){}
 
 void Field::ShowLaukas()
 {
+	cout << ' ';
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	for (int i = 0; i < 10; i++)
-		cout <<' '<< i;
+		cout << ' ' << i;
 	cout << endl;
 
 	for (int i = 0; i < 10; i++)
@@ -41,31 +42,23 @@ void Field::ShowLaukas()
 		cout << i;
 		for (int j = 0; j < 10; j++)
 		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 			cout << '|';
-			//if(laukas[i][j]=="~")												//vanduo
-				
-			if(laukas[i][j] == "#")										//laivo sveikoji dalis
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-			else if(laukas[i][j] == "")										//nepataikymas, alt 176
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-			else if(laukas[i][j] == "")									//pataikimas, alt 177
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-			else if(laukas[i][j] == "")										//sunaikinimas, alt 178
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-			else
+			if(laukas[i][j]=="~")												//vanduo
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+			else if (laukas[i][j] == "#")										//laivo sveikoji dalis
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+			else if (laukas[i][j] == "O")										//nepataikymas, alt 176
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			else if (laukas[i][j] == "+")									//pataikimas, alt 177
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+			else if (laukas[i][j] == "X")										//sunaikinimas, alt 178
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 
 			cout << laukas[i][j];
-
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-			cout<< '|';
 		}
 
-		for (int j = 0; j < 10; j++)
-		{
-			
-			cout << '|' << laukas[i][j] << '|';
-		}
-		cout << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+		cout << '|' << endl;
 	}
 }
