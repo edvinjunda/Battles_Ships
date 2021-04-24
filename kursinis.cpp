@@ -16,14 +16,18 @@
 int main()
 {
 
-	Field laukas;
+	Player laukas;
 
-	for (int i = 0; i < 10; i++)
+	laukas.RandomField();
+	laukas.ShowField();
+
+	/*for (int i = 0; i < 10; i++)
 	{
 		system("cls");
-		laukas.ShowLaukas();
+		laukas.RandomField();
+		laukas.ShowField();
 		Sleep(2000);
-	}
+	}*/
 	return 0;
 }
 
