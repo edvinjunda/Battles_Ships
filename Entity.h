@@ -11,7 +11,7 @@ using namespace std;
 class Entity
 {
 protected:
-	int laivas1, laivas2, laivas3, laivas4;
+	int laivai;
 public:
 	Entity();
 	virtual ~Entity();
@@ -21,10 +21,8 @@ public:
 
 };
 
-Entity::Entity() : laivas1(4), laivas2(3), laivas3(2), laivas4(1){}
+Entity::Entity() : laivai(10){}
 Entity::~Entity(){}
-
-//class Player : public Entity, public Field {};
 
 
 class Bot : public Entity, public Field
@@ -32,13 +30,19 @@ class Bot : public Entity, public Field
 public:
 	Bot();
 	~Bot();
-
-private:
+public:
+	string GetShot();
 
 };
 
 Bot::Bot(){}
 Bot::~Bot(){}
+
+string Bot::GetShot()
+{
+	return "1";
+
+}
 
 
 class Player : public Entity, public Field

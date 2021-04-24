@@ -17,17 +17,16 @@ int main()
 {
 
 	Player laukas;
+	Bot field;
 
+	field.RandomField();
+	field.ShowField();
+
+	cout << endl;
 	laukas.RandomField();
 	laukas.ShowField();
 
-	/*for (int i = 0; i < 2; i++)
-	{
-		system("cls");
-		laukas.RandomField();
-		laukas.ShowField();
-		Sleep(2000);
-	}*/
+
 	return 0;
 }
 

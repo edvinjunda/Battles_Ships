@@ -106,7 +106,7 @@ void Field::RandomField()
 				int x = rand() % 10 + 1;
 				for (int i = y - 1; i < y + blocks + 1; i++)
 				{
-					if (field[i - 1][x] == "#" || field[i][x] == "#" || field[i + 1][x] == "#")
+					if (field[i][x-1] == "#" || field[i][x] == "#" || field[i][x+1] == "#")
 					{
 						y = rand() % (10 - blocks + 1) + 1;
 						x = rand() % 10 + 1;
@@ -119,10 +119,9 @@ void Field::RandomField()
 					field[i][x] = "#";
 				}
 			}
-
-			ships++;
-			blocks--;
 		}
 
+		ships++;
+		blocks--;
 	}
 }
