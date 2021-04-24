@@ -21,7 +21,7 @@ int main()
 	laukas.RandomField();
 	laukas.ShowField();
 
-	/*for (int i = 0; i < 10; i++)
+	/*for (int i = 0; i < 2; i++)
 	{
 		system("cls");
 		laukas.RandomField();
