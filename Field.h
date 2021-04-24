@@ -14,9 +14,6 @@ protected:
 public:
 	Field();
 	virtual ~Field();
-private:
-	void HorizontalShipPutting(int& a, int& b, int korpusai);
-	void VerticalShipPutting(int& a, int& b, int korpusai);
 public:
 	void ShowField();
 	void RandomField();
@@ -34,50 +31,6 @@ Field::Field()
 	//		y  x
 }
 Field::~Field(){}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Field::HorizontalShipPutting(int& a, int& b, int korpusai)
-{
-		for (int i = a-1; i < a + korpusai+1; i++)
-		{
-			if (field[b][i + 1] == "#" ||
-				field[b][i - 1] == "#" ||
-				field[b + 1][i] == "#" ||
-				field[b - 1][i] == "#" ||
-				field[b + 1][i + 1] == "#" || 
-				field[b + 1][i - 1] == "#" ||
-				field[b - 1][i + 1] == "#" ||
-				field[b - 1][i - 1] == "#")
-			{
-				b = rand() % 10 + 1;
-				a = rand() % (10 - korpusai+1) + 1;
-				i = a;
-			}
-			cout << b-1 << ' ' << i-1 <<' '<<'H'<< endl;
-		}
-}
-
-void Field::VerticalShipPutting(int& a, int& b, int korpusai)
-{
-
-		for (int i = b; i < b + korpusai; i++)
-		{
-			if (field[i + 1][a] == "#" ||
-				field[i - 1][a] == "#" ||
-				field[i][a + 1] == "#" ||
-				field[i][a - 1] == "#" ||
-				field[i + 1][a + 1] == "#" ||
-				field[i + 1][a - 1] == "#" ||
-				field[i - 1][a + 1] == "#" ||
-				field[i - 1][a - 1] == "#")
-			{
-				b = rand() % (10 - korpusai+1) + 1;
-				a = rand() % 10 + 1;
-				i = b;
-			}
-		}
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10
@@ -123,48 +76,53 @@ void Field::RandomField()
 	srand(time(NULL));
 
 	int ships = 1, blocks = 4;
-	for (int j = 0; j < 3; j++)
+	for (int j = 0; j < 4; j++)
 	{
 		for (int l = 0; l < ships; l++)
 		{
-			
-			//if (rand() % 2)						//i kaire nukreiptas laivas
-			//{
+			if (rand() % 2)						//i kaire nukreiptas laivas
+			{
 				int y = rand() % 10 + 1;
-				int x = rand() % (10-blocks+1) + 1;
-
-				HorizontalShipPutting(x, y, blocks);
+				int x = rand() % (10 - blocks + 1) + 1;
+				for (int i = x - 1; i < x + blocks + 1; i++)
+				{
+					if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
+					{
+						y = rand() % 10 + 1;
+						x = rand() % (10 - blocks + 1) + 1;
+						i = x - 2;
+					}
+				}
 
 				for (int i = x; i < x + blocks; i++)
 				{
 					field[y][i] = "#";
 				}
-			//}
-			/*else								//i apacia nukreipia laiva
+			}
+
+			else								//i apacia nukreipia laiva
 			{
 				int y = rand() % (10 - blocks + 1) + 1;
 				int x = rand() % 10 + 1;
-
-				VerticalShipPutting(x, y, blocks);
+				for (int i = y - 1; i < y + blocks + 1; i++)
+				{
+					if (field[i - 1][x] == "#" || field[i][x] == "#" || field[i + 1][x] == "#")
+					{
+						y = rand() % (10 - blocks + 1) + 1;
+						x = rand() % 10 + 1;
+						i = y - 2;
+					}
+				}
 
 				for (int i = y; i < y + blocks; i++)
 				{
-					field[i][x] = "#"; 
+					field[i][x] = "#";
 				}
-			}*/
+			}
+
+			ships++;
+			blocks--;
 		}
-		ships++;
-		blocks--;
+
 	}
-	/*for (int l = 0; l < ships; l++)
-	{
-		int y = rand() % 10 + 1;
-		int x = rand() % 10 + 1;
-
-		HorizontalShipPutting(x, y, blocks);
-		
-		field[y][x] = "#";
-	}*/
-
-
 }
