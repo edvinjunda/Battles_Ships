@@ -15,18 +15,22 @@
 
 int main()
 {
-	Entity* e[2];
-	e[0] = new Player;
-	e[1] = new Bot;
+	/*Entity* entities[2];
+	entities[0] = new Player;
+	entities[1] = new Bot;
 
-	e[0]->RandomField();
-	e[0]->ShowField();
+	entities[0]->RandomField();
+	entities[0]->ShowField();
 	cout << endl;
-	e[1]->RandomField();
-	e[1]->ShowField();
+	entities[1]->RandomField();
+	entities[1]->ShowField();
 
 
-	/*Player laukas1;
+	delete[] entities;*/
+
+	//entities[0]->Shoot(entities[1]->GiveField());
+
+	Player laukas1;
 	Bot field;
 
 	laukas1.RandomField();
@@ -34,8 +38,18 @@ int main()
 	cout << endl;
 	field.RandomField();
 	field.ShowField();
-	*/
+	while (true)
+	{
+	int x, y;
+	laukas1.Shoot(x, y);
+	field.GetShot(x, y);
 
+	
+		system("cls");
+		laukas1.ShowField();
+		cout << endl;
+		field.ShowField();
+	}
 	return 0;
 }
 

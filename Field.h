@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include <iostream>
 #include <iomanip>
-#include <stdlib.h>
-#include <Windows.h>
+#include <stdlib.h>		/* srand, rand */
+#include <Windows.h>	/* time */
 #include <time.h>
 
 using namespace std;
@@ -11,7 +11,7 @@ using namespace std;
 class Field
 {
 protected:
-	string field[12][12];
+	string** field;//[12][12];
 public:
 	Field();
 	virtual ~Field();
@@ -24,15 +24,25 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Field::Field()
 {
+	field = new string* [12];
+	for (int i = 0; i < 12; i++)
+		field[i] = new string[12];
+
 	for (int i = 0; i < 12; i++)
 		for (int j = 0; j < 12; j++)
 			field[i][j] = "~";
+
 	srand(time(NULL));
 
 	//field[3][6]="X";
 	//		y  x
 }
-Field::~Field(){}
+Field::~Field()
+{
+	for (int i = 0; i < 12; i++)
+		delete[] field[i];
+	delete[] field;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10

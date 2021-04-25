@@ -16,7 +16,10 @@ public:
 	Entity();
 	virtual ~Entity();
 public:
-	virtual string GiveField() = 0;
+	//virtual void Shoot()=0;
+	virtual void GetShot(int x, int y);
+	//virtual string **GiveField();
+	//virtual void Shoot(string **f);
 
 
 };
@@ -24,40 +27,49 @@ public:
 Entity::Entity() : laivai(10){}
 Entity::~Entity(){}
 
+void Entity::GetShot(int x, int y)
+{
+	//cout << x <<' '<< y << endl;
+	if(field[y][x]=="#")
+		field[y][x] = "+";
+	else
+	{
+		field[y][x] = "O";
+	}
+}
+
+/*void Entity::Shoot(string **f)
+{
+	f[rand() % 10 + 1][rand() % 10 + 1] = "+";
+}*/
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Bot : public Entity//, public Field
+class Bot : public Entity
 {
 public:
-	Bot();
-	~Bot();
-public:
-	string GiveField();
+	void Shoot(int& x, int& y);
+
 };
 
-Bot::Bot(){}
-Bot::~Bot(){}
-
-string Bot::GiveField()
+void Bot::Shoot(int& x, int& y)
 {
-	return **field;
+	;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Player : public Entity//, public Field
+class Player : public Entity
 {
 public:
-	Player();
-	~Player();
-public:
-	string GiveField();
+	void Shoot(int& x, int& y);
 
+	
 };
 
-Player::Player(){}
-Player::~Player(){}
-
-string Player::GiveField()
+void Player::Shoot(int& x, int& y)
 {
-	return **field;
+	cout << "Ivesti koordinates: " << endl;
+	cin >> x >> y;
+	x++;
+	y++;
 }
