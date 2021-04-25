@@ -15,15 +15,26 @@
 
 int main()
 {
+	Entity* e[2];
+	e[0] = new Player;
+	e[1] = new Bot;
 
-	Player laukas1, laukas2;
+	e[0]->RandomField();
+	e[0]->ShowField();
+	cout << endl;
+	e[1]->RandomField();
+	e[1]->ShowField();
+
+
+	/*Player laukas1;
+	Bot field;
 
 	laukas1.RandomField();
 	laukas1.ShowField();
 	cout << endl;
-	laukas2.RandomField();
-	laukas2.ShowField();
-
+	field.RandomField();
+	field.ShowField();
+	*/
 
 	return 0;
 }

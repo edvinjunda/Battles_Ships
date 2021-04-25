@@ -8,13 +8,15 @@
 using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Entity
+class Entity : public Field
 {
 protected:
 	int laivai;
 public:
 	Entity();
 	virtual ~Entity();
+public:
+	virtual string GiveField() = 0;
 
 
 };
@@ -24,24 +26,38 @@ Entity::~Entity(){}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Bot : public Entity, public Field
+class Bot : public Entity//, public Field
 {
 public:
 	Bot();
 	~Bot();
+public:
+	string GiveField();
 };
 
 Bot::Bot(){}
 Bot::~Bot(){}
 
+string Bot::GiveField()
+{
+	return **field;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Player : public Entity, public Field
+class Player : public Entity//, public Field
 {
 public:
 	Player();
 	~Player();
+public:
+	string GiveField();
+
 };
 
 Player::Player(){}
 Player::~Player(){}
 
+string Player::GiveField()
+{
+	return **field;
+}
