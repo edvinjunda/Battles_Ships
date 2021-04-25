@@ -1,7 +1,3 @@
 ﻿  kursinis.cpp
-C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\Field.h(76,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\kursinis.cpp(20,6): error C2259: 'Bot': cannot instantiate abstract class
-C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\Entity.h(30): message : see declaration of 'Bot'
-C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\kursinis.cpp(20,6): message : due to following members:
-C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\kursinis.cpp(20,6): message : 'std::string Entity::GetShot(void)': is abstract
-C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\Entity.h(19): message : see declaration of 'Entity::GetShot'
+C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\Field.h(30,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  kursinis.vcxproj -> C:\Users\edwin\Desktop\Edvin\Fleshka\Universitetas\2 semestras\objektinis programavimas\kursinis darbas\kursinis\Debug\kursinis.exe

@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
 #include <Windows.h>
 #include <time.h>
 
@@ -26,6 +27,7 @@ Field::Field()
 	for (int i = 0; i < 12; i++)
 		for (int j = 0; j < 12; j++)
 			field[i][j] = "~";
+	srand(time(NULL));
 
 	//field[3][6]="X";
 	//		y  x
@@ -73,7 +75,7 @@ void Field::ShowField()
 
 void Field::RandomField()
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	int ships = 1, blocks = 4;
 	for (int j = 0; j < 4; j++)
@@ -125,3 +127,4 @@ void Field::RandomField()
 		blocks--;
 	}
 }
+

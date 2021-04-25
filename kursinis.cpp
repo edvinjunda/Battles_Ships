@@ -16,15 +16,13 @@
 int main()
 {
 
-	Player laukas;
-	Bot field;
+	Player laukas1, laukas2;
 
-	field.RandomField();
-	field.ShowField();
-
+	laukas1.RandomField();
+	laukas1.ShowField();
 	cout << endl;
-	laukas.RandomField();
-	laukas.ShowField();
+	laukas2.RandomField();
+	laukas2.ShowField();
 
 
 	return 0;
