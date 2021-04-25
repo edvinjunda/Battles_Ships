@@ -1,4 +1,4 @@
-// kursinis.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// kursinis.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 ////
 #include <conio.h>
@@ -15,40 +15,37 @@
 
 int main()
 {
-	/*Entity* entities[2];
-	entities[0] = new Player;
-	entities[1] = new Bot;
 
-	entities[0]->RandomField();
-	entities[0]->ShowField();
+	Player player;
+	Bot bot,visible_bot_field;
+
+	++bot;
 	cout << endl;
-	entities[1]->RandomField();
-	entities[1]->ShowField();
-
-
-	delete[] entities;*/
-
-	//entities[0]->Shoot(entities[1]->GiveField());
-
-	Player laukas1;
-	Bot field;
-
-	laukas1.RandomField();
-	laukas1.ShowField();
-	cout << endl;
-	field.RandomField();
-	field.ShowField();
+	++player;
+	
 	while (true)
 	{
-	int x, y;
-	laukas1.Shoot(x, y);
-	field.GetShot(x, y);
+		system("cls");
+		*visible_bot_field;
+		*player;
+
+		int x, y;
+		player.Shoot(x, y);
+		if (x < 1 || x>10 || y < 1 || y>10)
+		{
+			cout << "Choose coordinates between 0 and 9!" << endl;
+			Sleep(3000);
+			continue;
+		}
+		if (bot.RepeatedShot(x, y))
+		{
+			Sleep(3000);
+			continue;
+		}
+		bot.GetShot(x, y,visible_bot_field);
 
 	
-		system("cls");
-		laukas1.ShowField();
-		cout << endl;
-		field.ShowField();
+		
 	}
 	return 0;
 }

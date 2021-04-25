@@ -16,8 +16,8 @@ public:
 	Field();
 	virtual ~Field();
 public:
-	void ShowField();
-	void RandomField();
+	void operator *();		//ShowField
+	void operator ++();		//RandomField
 
 
 };
@@ -47,13 +47,13 @@ Field::~Field()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10
 
-void Field::ShowField()
+void Field::operator *()
 {
 	cout << ' ';
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	for (int i = 0; i < 10; i++)
 		cout << ' ' << i;
-	cout << endl;
+	cout <<' '<<"x axis"<< endl;
 
 	for (int i = 1; i < 11; i++)
 	{
@@ -81,9 +81,12 @@ void Field::ShowField()
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		cout << '|' << endl;
 	}
+	
+	cout << "y axis" << endl << endl;
+
 }
 
-void Field::RandomField()
+void Field::operator ++()
 {
 	//srand(time(NULL));
 

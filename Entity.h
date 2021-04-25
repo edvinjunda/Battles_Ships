@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -18,7 +18,6 @@ public:
 public:
 	//virtual void Shoot()=0;
 	virtual void GetShot(int x, int y);
-	//virtual string **GiveField();
 	//virtual void Shoot(string **f);
 
 
@@ -49,12 +48,51 @@ class Bot : public Entity
 {
 public:
 	void Shoot(int& x, int& y);
+	void GetShot(int x, int y, Bot &clone);
+	bool RepeatedShot(int x, int y);
 
 };
 
 void Bot::Shoot(int& x, int& y)
 {
 	;
+}
+
+void Bot::GetShot(int x, int y, Bot &clone)
+{
+	if (field[y][x] == "#")
+	{
+		if (field[y - 1][x] != "#" &&
+			field[y + 1][x] != "#" &&
+			field[y][x - 1] != "#" &&
+			field[y][x + 1] != "#")
+		{
+			field[y][x] = "X";
+			clone.field[y][x] = "X";
+		}
+		else
+		{
+			field[y][x] = "+";
+			clone.field[y][x] = "+";
+		}
+		
+	}
+
+	else
+	{
+		field[y][x] = "O";
+		clone.field[y][x] = "O";
+	}
+}
+
+bool Bot::RepeatedShot(int x, int y)
+{
+	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
+	{
+		cout << "You already shoot here, choose another position!" << endl;
+		return true;
+	}
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +106,7 @@ public:
 
 void Player::Shoot(int& x, int& y)
 {
-	cout << "Ivesti koordinates: " << endl;
+	cout << "Enter x and y coordinations: " << endl;
 	cin >> x >> y;
 	x++;
 	y++;
