@@ -62,6 +62,23 @@ void Bot::GetShot(int x, int y, Bot &clone)
 {
 	if (field[y][x] == "#")
 	{
+		/*int start = y;
+		int i = 0;
+		while (true)
+		{
+			i++;
+			if (field[y - i][x] != "#" &&
+				field[y - i][x] == "+")
+				start = y - i;
+			else if(field[y - 1][x] == "~" || field[y - 1][x] != "O")
+			{
+				start = y - i + 1;
+				
+			}
+
+		
+		}*/
+
 		if (field[y - 1][x] != "#" &&
 			field[y + 1][x] != "#" &&
 			field[y][x - 1] != "#" &&

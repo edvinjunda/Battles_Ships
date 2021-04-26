@@ -4,6 +4,7 @@
 #include <stdlib.h>		/* srand, rand */
 #include <Windows.h>	/* time */
 #include <time.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -17,10 +18,15 @@ public:
 	virtual ~Field();
 public:
 	void operator *();		//ShowField
-	void operator ++();		//RandomField
+	void operator ++();		//RandomShipGenerator
+	void operator ++(int);  //ManuallShipPlacement
 
 
 };
+
+void EnterDirection(char &direction);
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Field::Field()
 {
@@ -141,3 +147,41 @@ void Field::operator ++()
 	}
 }
 
+void Field::operator ++(int)
+{
+	int ships = 1, blocks = 4;
+	for (int j = 0; j < 4; j++)
+	{
+		//cout << "Ships generate from left to right or from top to bottom." << endl;
+		//cout << "If you want put ship horizontally, it will go rightwards from x y coordinates" << endl;
+		//cout << "If you want put ship vertically, it will go downwards from x y coordinates." << endl;
+		//cout << "Remember, place ships in a way to not collide them!" << endl;
+
+		cout << ships << " placed." << endl;
+		for (int l = 0; l < ships; l++)
+		{
+			cout << "Currently placing " << blocks << " blocks size ship." << endl;
+			cout << "In order to place ship horizontally, type H/h" << endl;
+			cout << "In order to place ship vertically, type V/v" << endl;
+
+			char direction;
+			EnterDirection(direction);
+
+
+
+				for (int i = y; i < y + blocks; i++)
+				{
+					field[i][x] = "#";
+				}
+			
+		}
+
+		ships++;
+		blocks--;
+	}
+}
+
+void EnterDirection(char &direction)
+{
+	direction = getch();
+}
