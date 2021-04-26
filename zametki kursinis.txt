@@ -1,0 +1,1 @@
+niekataryje teksty mozna zrabic const

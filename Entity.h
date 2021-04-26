@@ -123,7 +123,7 @@ public:
 
 void Player::Shoot(int& x, int& y)
 {
-	cout << "Enter x and y coordinations: " << endl;
+	cout << "Enter x and y coordinates: " << endl;
 	cin >> x >> y;
 	x++;
 	y++;

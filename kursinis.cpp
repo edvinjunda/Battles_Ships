@@ -1,7 +1,6 @@
 ﻿// kursinis.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 ////
-#include <conio.h>
 #include <string>
 #include <stdlib.h>
 #include <fstream>
@@ -10,6 +9,7 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
+#include <Windows.h>
 #include "Entity.h"
 #include "Field.h"
 
@@ -19,22 +19,48 @@ int main()
 	Player player;
 	Bot bot,visible_bot_field;
 
+	while (true)
+	{
+		cout << "If you want place ships manually, enter m/M" << endl;
+		cout << "If you want place ships randomly, enter r/R" << endl;
+		char choice;
+		cin >> choice;
+		if (choice == 'm' || choice == 'M')
+		{
+			player++; 
+			system("cls");
+			break;
+		}
+		else if (choice == 'r' || choice == 'R')
+		{
+			++player;
+			system("cls");
+			break;
+		}
+		else
+		{
+			system("cls");
+			cout << "Enter valid letter!" << endl;
+			
+		}
+	}
 	++bot;
-	cout << endl;
-	++player;
-	
+
+
+	//Sleep(2000);cin.fail()
+
 	while (true)
 	{
 		system("cls");
-		*visible_bot_field;
-		*player;
+		visible_bot_field.ShowField();
+		player.ShowField();
 
 		int x, y;
 		player.Shoot(x, y);
 		if (x < 1 || x>10 || y < 1 || y>10)
 		{
 			cout << "Choose coordinates between 0 and 9!" << endl;
-			Sleep(3000);
+			Sleep(2000);
 			continue;
 		}
 		if (bot.RepeatedShot(x, y))

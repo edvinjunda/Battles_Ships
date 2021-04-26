@@ -17,15 +17,16 @@ public:
 	Field();
 	virtual ~Field();
 public:
-	void operator *();		//ShowField
+	void ShowField();		//ShowField
 	void operator ++();		//RandomShipGenerator
 	void operator ++(int);  //ManuallShipPlacement
 
 
 };
 
-void EnterDirection(char &direction);
-
+void UnvalidHorizontalPlacement(int& x, int& y, int blocks);
+void UnvalidVerticalPlacement(int& x, int& y, int blocks);
+void IgnoreLine();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Field::Field()
@@ -53,7 +54,7 @@ Field::~Field()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10
 
-void Field::operator *()
+void Field::ShowField()
 {
 	cout << ' ';
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -92,25 +93,25 @@ void Field::operator *()
 
 }
 
-void Field::operator ++()
+void Field::operator++()									
 {
-	//srand(time(NULL));
+
 
 	int ships = 1, blocks = 4;
 	for (int j = 0; j < 4; j++)
 	{
 		for (int l = 0; l < ships; l++)
 		{
-			if (rand() % 2)						//i kaire nukreiptas laivas
+			if (rand() % 2)						//i desine nukreiptas laivas
 			{
 				int y = rand() % 10 + 1;
-				int x = rand() % (10 - blocks + 1) + 1;
+				int x = rand() % (11 - blocks) + 1;
 				for (int i = x - 1; i < x + blocks + 1; i++)
 				{
 					if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
 					{
 						y = rand() % 10 + 1;
-						x = rand() % (10 - blocks + 1) + 1;
+						x = rand() % (11 - blocks) + 1;
 						i = x - 2;
 					}
 				}
@@ -123,13 +124,13 @@ void Field::operator ++()
 
 			else								//i apacia nukreipia laiva
 			{
-				int y = rand() % (10 - blocks + 1) + 1;
+				int y = rand() % (11 - blocks) + 1;
 				int x = rand() % 10 + 1;
 				for (int i = y - 1; i < y + blocks + 1; i++)
 				{
 					if (field[i][x-1] == "#" || field[i][x] == "#" || field[i][x+1] == "#")
 					{
-						y = rand() % (10 - blocks + 1) + 1;
+						y = rand() % (11 - blocks) + 1;
 						x = rand() % 10 + 1;
 						i = y - 2;
 					}
@@ -150,6 +151,7 @@ void Field::operator ++()
 void Field::operator ++(int)
 {
 	int ships = 1, blocks = 4;
+
 	for (int j = 0; j < 4; j++)
 	{
 		//cout << "Ships generate from left to right or from top to bottom." << endl;
@@ -157,31 +159,141 @@ void Field::operator ++(int)
 		//cout << "If you want put ship vertically, it will go downwards from x y coordinates." << endl;
 		//cout << "Remember, place ships in a way to not collide them!" << endl;
 
-		cout << ships << " placed." << endl;
+		
 		for (int l = 0; l < ships; l++)
 		{
+			system("cls");
+			ShowField();
+			cout << endl;
+
+			cout << ships * l + j << '/' << 10 << " ships placed." << endl;
 			cout << "Currently placing " << blocks << " blocks size ship." << endl;
-			cout << "In order to place ship horizontally, type H/h" << endl;
-			cout << "In order to place ship vertically, type V/v" << endl;
+			cout << "In order to place ship horizontally, type h/H" << endl;
+			cout << "In order to place ship vertically, type v/V" << endl;
 
-			char direction;
-			EnterDirection(direction);
-
-
-
-				for (int i = y; i < y + blocks; i++)
+				char direction;
+				while (true)
 				{
-					field[i][x] = "#";
-				}
-			
-		}
+					int x, y;
+					cin >> direction;
+					if (direction == 'h' || direction == 'H')					//horizontal
+					{
+						cout << "Enter x and y coordinates: ";
+						cin >> x >> y;
 
+						UnvalidHorizontalPlacement(x, y, blocks);
+						x++;
+						y++;
+
+						for (int i = x - 1; i < x + blocks + 1; i++)
+						{
+							if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
+							{
+								cout << "Ship which you want to place will collide with another ship!" << endl;
+								cout << "Enter other x coordinate: " << endl;
+								cin >> x >> y;
+
+								UnvalidHorizontalPlacement(x, y, blocks);
+
+								x++;
+								y++;
+								i = x - 2;
+							}
+						}
+
+						for (int i = x; i < x + blocks; i++)
+						{
+							field[y][i] = "#";
+						}
+
+						break;
+					}
+
+					else if (direction == 'v' || direction == 'V')					//vertical
+					{
+						cout << "Enter x and y coordinates: ";
+						cin >> x >> y;
+
+						UnvalidVerticalPlacement(x, y, blocks);
+						x++;
+						y++;
+
+						for (int i = y - 1; i < y + blocks + 1; i++)
+						{
+							if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
+							{
+								cout << "Ship which you want to place will collide with another ship!" << endl;
+								cout << "Enter other y coordinate: " << endl;
+								cin >> x >> y;
+
+								UnvalidVerticalPlacement(x, y, blocks);
+
+								x++;
+								y++;
+								i = y - 2;
+							}
+						}
+
+						for (int i = y; i < y + blocks; i++)
+						{
+							field[i][x] = "#";
+						}
+						break;
+					}
+
+					else
+					{
+						cout << "Enter correct direction!" << endl;
+					}
+				}
+		}
 		ships++;
 		blocks--;
 	}
+
+	cout << "Pleas wait few seconds, preparation of match is going on." << endl;
+	Sleep(3000);
+
 }
 
-void EnterDirection(char &direction)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 {
-	direction = getch();
+	while (true)
+	{
+		if (x < 0 || x>10 - blocks || y < 0 || y>9 || cin.fail())
+		{
+			IgnoreLine();
+
+			cout << "Enter valid coordinates!" << endl;
+			cin >> x >> y;
+		}
+
+		else
+			break;
+	}
+}
+
+void UnvalidVerticalPlacement(int& x, int& y, int blocks)
+{
+	while (true)
+	{
+		if (x < 0 || x>9 || y < 0 || y>10 - blocks || cin.fail())
+		{
+			IgnoreLine();
+
+			cout << "Enter valid coordinates!" << endl;
+			cin >> x >> y;
+		}
+
+		else
+			break;
+	}
+}
+
+
+void IgnoreLine()
+{
+	cin.clear(); // clear input buffer to restore cin to a usable state
+	cin.ignore(INT_MAX, '\n'); // ignore last input
 }
