@@ -70,6 +70,14 @@ int main()
 		}
 		bot.GetShot(x, y,visible_bot_field);
 
+		system("cls");
+		visible_bot_field.ShowField();
+		player.ShowField();
+
+
+
+		
+
 	
 		
 	}

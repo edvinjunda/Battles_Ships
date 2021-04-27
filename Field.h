@@ -150,7 +150,7 @@ void Field::operator++()
 
 void Field::operator ++(int)
 {
-	int ships = 1, blocks = 4;
+	int ships = 1, blocks = 4,placed_ships=0;
 
 	for (int j = 0; j < 4; j++)
 	{
@@ -158,7 +158,6 @@ void Field::operator ++(int)
 		//cout << "If you want put ship horizontally, it will go rightwards from x y coordinates" << endl;
 		//cout << "If you want put ship vertically, it will go downwards from x y coordinates." << endl;
 		//cout << "Remember, place ships in a way to not collide them!" << endl;
-
 		
 		for (int l = 0; l < ships; l++)
 		{
@@ -166,7 +165,7 @@ void Field::operator ++(int)
 			ShowField();
 			cout << endl;
 
-			cout << ships * l + j << '/' << 10 << " ships placed." << endl;
+			cout << placed_ships << '/' << 10 << " ships placed." << endl;
 			cout << "Currently placing " << blocks << " blocks size ship." << endl;
 			cout << "In order to place ship horizontally, type h/H" << endl;
 			cout << "In order to place ship vertically, type v/V" << endl;
@@ -246,6 +245,7 @@ void Field::operator ++(int)
 						cout << "Enter correct direction!" << endl;
 					}
 				}
+				placed_ships++;
 		}
 		ships++;
 		blocks--;
