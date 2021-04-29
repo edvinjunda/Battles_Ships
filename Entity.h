@@ -57,16 +57,14 @@ public:
 	void SetHit(int h);
 	void SetAB(int x, int y);
 	int GetHitValue();
-	void GetShot(int x, int y, Bot &clone);
+	void GetShot(int x, int y, Bot &clone, bool& one_more);
 	bool RepeatedShot(int x, int y);
 
 };
 
 void Bot::Shoot(int& x, int& y)
 {
-	cout << "Now it's enemy's turn to shoot!" << endl;
-
-	Sleep(2000);
+	
 
 	/*if (hit == 1)		//a != 0 && b != 0 && 
 	{
@@ -176,27 +174,11 @@ void Bot::SetAB(int x, int y)
 	b = y;
 }
 
-void Bot::GetShot(int x, int y, Bot &clone)
+void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 {
 	if (field[y][x] == "#")
 	{
-		/*int start = y;
-		int i = 0;
-		while (true)
-		{
-			i++;
-			if (field[y - i][x] != "#" &&
-				field[y - i][x] == "+")
-				start = y - i;
-			else if(field[y - 1][x] == "~" || field[y - 1][x] != "O")
-			{
-				start = y - i + 1;
-				
-			}
-
-		
-		}*/
-
+		one_more = 1;
 		if (field[y - 1][x] != "#" &&
 			field[y + 1][x] != "#" &&
 			field[y][x - 1] != "#" &&
@@ -214,13 +196,17 @@ void Bot::GetShot(int x, int y, Bot &clone)
 			field[y][x] = "+";
 			clone.field[y][x] = "+";
 		}
-		
+		cout << "Good shot! Shoot again!" << endl;
+		Sleep(3000);
 	}
 
 	else
 	{
+		one_more = 0;
 		field[y][x] = "O";
 		clone.field[y][x] = "O";
+		cout << "You missed..." << endl;
+		Sleep(3000);
 	}
 }
 
@@ -239,7 +225,7 @@ class Player : public Entity
 {
 public:
 	void Shoot(int& x, int& y);
-	void GetShot(int x, int y, Bot& hit);
+	void GetShot(int x, int y, Bot& hit, bool& one_more);
 	bool RepeatedShot(int x, int y);
 };
 
@@ -248,14 +234,13 @@ void Player::Shoot(int& x, int& y)
 	cout << "Your turn to shoot!" << endl;
 	cout << "Enter x and y coordinates: " << endl;
 	cin >> x >> y;
-	x++;
-	y++;
 }
 
-void Player::GetShot(int x, int y,Bot &hit)
+void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 {
 	if (field[y][x] == "#")
 	{
+		one_more = 1;
 		if (field[y - 1][x] != "#" &&
 			field[y + 1][x] != "#" &&
 			field[y][x - 1] != "#" &&
@@ -290,11 +275,13 @@ void Player::GetShot(int x, int y,Bot &hit)
 			}
 
 		}
-
+		cout << "You got hit by the enemy!" << endl;
+		Sleep(2500);
 	}
 
 	else
 	{
+		one_more = 0;
 		field[y][x] = "O";
 		if (hit.GetHitValue() == 1)
 		{
@@ -306,6 +293,8 @@ void Player::GetShot(int x, int y,Bot &hit)
 			hit.SetHit(4);
 			//hit.SetShootingDirection();
 		}
+		cout << "Enemy missed" << endl;
+		Sleep(2500);
 	}
 }
 

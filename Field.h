@@ -5,6 +5,7 @@
 #include <Windows.h>	/* time */
 #include <time.h>
 #include <conio.h>
+#include "Utilities.h"
 
 using namespace std;
 
@@ -20,13 +21,11 @@ public:
 	void ShowField();		//ShowField
 	void operator ++();		//RandomShipGenerator
 	void operator ++(int);  //ManuallShipPlacement
-
-
+private:
+	void UnvalidHorizontalPlacement(int& x, int& y, int blocks);
+	void UnvalidVerticalPlacement(int& x, int& y, int blocks);
 };
 
-void UnvalidHorizontalPlacement(int& x, int& y, int blocks);
-void UnvalidVerticalPlacement(int& x, int& y, int blocks);
-void IgnoreLine();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Field::Field()
@@ -193,9 +192,9 @@ void Field::operator ++(int)
 								cin >> x >> y;
 
 								UnvalidHorizontalPlacement(x, y, blocks);
-
 								x++;
 								y++;
+
 								i = x - 2;
 							}
 						}
@@ -226,9 +225,9 @@ void Field::operator ++(int)
 								cin >> x >> y;
 
 								UnvalidVerticalPlacement(x, y, blocks);
-
 								x++;
 								y++;
+
 								i = y - 2;
 							}
 						}
@@ -256,8 +255,8 @@ void Field::operator ++(int)
 
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void UnvalidHorizontalPlacement(int& x, int& y, int blocks)
+
+void Field::UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 {
 	while (true)
 	{
@@ -274,7 +273,7 @@ void UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 	}
 }
 
-void UnvalidVerticalPlacement(int& x, int& y, int blocks)
+void Field::UnvalidVerticalPlacement(int& x, int& y, int blocks)
 {
 	while (true)
 	{
@@ -289,11 +288,4 @@ void UnvalidVerticalPlacement(int& x, int& y, int blocks)
 		else
 			break;
 	}
-}
-
-
-void IgnoreLine()
-{
-	cin.clear(); // clear input buffer to restore cin to a usable state
-	cin.ignore(INT_MAX, '\n'); // ignore last input
 }

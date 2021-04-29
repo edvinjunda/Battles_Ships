@@ -12,6 +12,7 @@
 #include <Windows.h>
 #include "Entity.h"
 #include "Field.h"
+#include "Utilities.h"
 
 int main()
 {
@@ -47,39 +48,58 @@ int main()
 	++bot;
 
 
-	//Sleep(2000);cin.fail()
-int x, y;
+		//Sleep(2000);cin.fail()
+	int x, y;
+	bool one_more=0;
 	while (true)
 	{
+		do
+		{
+			system("cls");
+			visible_bot_field.ShowField();
+			player.ShowField();
+
+			player.Shoot(x, y);
+			UnvalidCoordinates(x, y);
+			x++;
+			y++;
+
+			while(x < 1 || x>10 || y < 1 || y>10)
+			{
+				cout << "Choose coordinates between 0 and 9!" << endl;
+				player.Shoot(x, y);
+				UnvalidCoordinates(x, y);
+				x++;
+				y++;
+				break;
+			}
+			while
+			(bot.RepeatedShot(x, y))
+			{
+				player.Shoot(x, y);
+				UnvalidCoordinates(x, y);
+				x++;
+				y++;
+				break;
+			}
+			bot.GetShot(x, y, visible_bot_field, one_more);
+		} while (one_more);
+
+		do
+		{
 		system("cls");
 		visible_bot_field.ShowField();
 		player.ShowField();
 
-		player.Shoot(x, y);
-		if (x < 1 || x>10 || y < 1 || y>10)
-		{
-			cout << "Choose coordinates between 0 and 9!" << endl;
-			Sleep(2000);
-			continue;
-		}
-		if (bot.RepeatedShot(x, y))
-		{
-			Sleep(3000);
-			continue;
-		}
-		bot.GetShot(x, y,visible_bot_field);
-
-		system("cls");
-		visible_bot_field.ShowField();
-		player.ShowField();
-
+		cout << "Now it's enemy's turn to shoot!" << endl;
+		Sleep(1000);
 		bot.Shoot(x, y);
 		while (player.RepeatedShot(x, y))
 		{
 			bot.Shoot(x, y);
 		}
-		player.GetShot(x, y, bot);
-
+		player.GetShot(x, y, bot, one_more);
+		} while (one_more);
 	
 		
 	}
