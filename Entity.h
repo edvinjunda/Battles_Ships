@@ -48,11 +48,15 @@ class Bot : public Entity
 {
 private:
 	int a, b, hit;
+	char direction;
 public:
-	Bot() : a(0), b(0), hit(0) {}
+	Bot() : a(0), b(0), hit(0),direction('o') {}
 	~Bot() {}
 public:
 	void Shoot(int& x, int& y);
+	void SetHit(int h);
+	void SetAB(int x, int y);
+	int GetHitValue();
 	void GetShot(int x, int y, Bot &clone);
 	bool RepeatedShot(int x, int y);
 
@@ -64,7 +68,7 @@ void Bot::Shoot(int& x, int& y)
 
 	Sleep(2000);
 
-	if (a != 0 && b != 0&&hit==1)
+	/*if (hit == 1)		//a != 0 && b != 0 && 
 	{
 		int shot = rand() % 4;
 
@@ -87,18 +91,89 @@ void Bot::Shoot(int& x, int& y)
 			x = a - 1;
 			break;
 		default:
-			throw "Bot has just passed away, press F for respect.";
+			//throw "Enemy's ships are defective";
 			break;
 		}
 	}
 
-	else
+	else if (hit == 2)		//a != 0 && b != 0 && 
 	{
-		y = rand() % 10 + 1;
-		x = rand() % 10 + 1;
+		hit = 1;
 	}
 
+	else if (hit == 3)		//a != 0 && b != 0 && 
+	{
+		switch (direction)
+		{
+		case 'u':
+			y = b - 1;
+			x = a;
+			break;
+		case 'r':
+			y = b;
+			x = a + 1;
+			break;
+		case 'd':
+			y = b + 1;
+			x = a;
+			break;
+		case 'l':
+			y = b;
+			x = a - 1;
+			break;
+		default:
+			//throw "Enemy's ships are defective";
+			break;
+
+		}
+	}
+
+	else if (hit == 4)
+	{
+		switch (direction)
+		{
+		case 'u':
+			direction = 'd';
+			break;
+		case 'r':
+			direction = 'l';
+			break;
+		case 'd':
+			direction = 'u';
+			break;
+		case 'l':
+			direction = 'r';
+			break;
+		default:
+			//throw "Enemy's ships are defective";
+			break;
+
+		}
+	}
+
+	else
+	{*/
+		y = rand() % 10 + 1;
+		x = rand() % 10 + 1;
+	//}
+
 	
+}
+
+void Bot::SetHit(int h)
+{
+	hit = h;
+}
+
+int Bot::GetHitValue()
+{
+	return hit;
+}
+
+void Bot::SetAB(int x, int y)
+{
+	a = x;
+	b = y;
 }
 
 void Bot::GetShot(int x, int y, Bot &clone)
@@ -164,8 +239,8 @@ class Player : public Entity
 {
 public:
 	void Shoot(int& x, int& y);
-	void GetShot(int x, int y);
-	
+	void GetShot(int x, int y, Bot& hit);
+	bool RepeatedShot(int x, int y);
 };
 
 void Player::Shoot(int& x, int& y)
@@ -177,27 +252,10 @@ void Player::Shoot(int& x, int& y)
 	y++;
 }
 
-void Player::GetShot(int x, int y)
+void Player::GetShot(int x, int y,Bot &hit)
 {
 	if (field[y][x] == "#")
 	{
-		/*int start = y;
-		int i = 0;
-		while (true)
-		{
-			i++;
-			if (field[y - i][x] != "#" &&
-				field[y - i][x] == "+")
-				start = y - i;
-			else if(field[y - 1][x] == "~" || field[y - 1][x] != "O")
-			{
-				start = y - i + 1;
-
-			}
-
-
-		}*/
-
 		if (field[y - 1][x] != "#" &&
 			field[y + 1][x] != "#" &&
 			field[y][x - 1] != "#" &&
@@ -208,10 +266,29 @@ void Player::GetShot(int x, int y)
 			field[y][x + 1] != "+")
 		{
 			field[y][x] = "X";
+			hit.SetHit(0);
+			hit.SetAB(0, 0);
 		}
 		else
 		{
 			field[y][x] = "+";
+			if (hit.GetHitValue() == 0)
+			{
+				hit.SetHit(1);
+				hit.SetAB(x,y);
+			}
+			else if (hit.GetHitValue() == 1)
+			{
+				hit.SetHit(3);
+				hit.SetAB(x, y);
+				//hit.SetShootingDirection();
+			}
+			else if (hit.GetHitValue() == 2)
+			{
+				hit.SetHit(3);
+				//hit.SetShootingDirection();
+			}
+
 		}
 
 	}
@@ -219,5 +296,24 @@ void Player::GetShot(int x, int y)
 	else
 	{
 		field[y][x] = "O";
+		if (hit.GetHitValue() == 1)
+		{
+			hit.SetHit(2);
+			hit.SetAB(x, y);
+		}
+		else if(hit.GetHitValue() == 3)
+		{
+			hit.SetHit(4);
+			//hit.SetShootingDirection();
+		}
 	}
+}
+
+bool Player::RepeatedShot(int x, int y)
+{
+	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
+	{
+		return true;
+	}
+	return false;
 }

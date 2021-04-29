@@ -2,5 +2,7 @@ niekataryje teksty mozna zrabic const
 wsie funkcyji i metady perapisac w addzielnyje faily
 exceptiony zrabic tam gdzie sztota moze pajci nie tak nie pa majej winie (adzin jest w entity 90 eil)
 hit=0 -> nie byla papadanij | 
-hit=1 -> bylo papadanije, no sleduszeje nie ugadano |
-hit=2 -> pradalzac strelbu
+hit=1 -> bylo papadanije, dalej ugadywac |
+hit=2 -> bylo papadanije, ale dalej nie ugadal |
+hit=3 -> pradalzac strelbu |
+hit=4 -> strelac w apredzielonuje naprawlenije |

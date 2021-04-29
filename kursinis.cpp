@@ -48,14 +48,13 @@ int main()
 
 
 	//Sleep(2000);cin.fail()
-
+int x, y;
 	while (true)
 	{
 		system("cls");
 		visible_bot_field.ShowField();
 		player.ShowField();
 
-		int x, y;
 		player.Shoot(x, y);
 		if (x < 1 || x>10 || y < 1 || y>10)
 		{
@@ -74,9 +73,12 @@ int main()
 		visible_bot_field.ShowField();
 		player.ShowField();
 
-
-
-		
+		bot.Shoot(x, y);
+		while (player.RepeatedShot(x, y))
+		{
+			bot.Shoot(x, y);
+		}
+		player.GetShot(x, y, bot);
 
 	
 		
