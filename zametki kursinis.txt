@@ -6,3 +6,6 @@ hit=1 -> bylo papadanije, dalej ugadywac |
 hit=2 -> bylo papadanije, ale dalej nie ugadal |
 hit=3 -> pradalzac strelbu |
 hit=4 -> strelac w apredzielonuje naprawlenije |
+
+tam gdzie ///////////////////////////////////////////////////////////////////////////////////////////
+pazniej ich skasawac kab sleep rabotal

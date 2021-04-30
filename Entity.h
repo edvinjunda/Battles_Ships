@@ -65,96 +65,125 @@ public:
 void Bot::Shoot(int& x, int& y)
 {
 	
-
-	/*if (hit == 1)		//a != 0 && b != 0 && 
+	do
 	{
-		int shot = rand() % 4;
-
-		switch (shot)
+		if (hit == 1)		//a != 0 && b != 0 && 
 		{
-		case 0:
-			y = b - 1;
-			x = a;
-			break;
-		case 1:
-			y = b;
-			x = a + 1;
-			break;
-		case 2:
-			y = b + 1;
-			x = a;
-			break;
-		case 3:
-			y = b;
-			x = a - 1;
-			break;
-		default:
-			//throw "Enemy's ships are defective";
+			int shot = 0;
+
+			while (true)
+			{
+				cout << 1 << endl;
+				shot = rand() % 4;
+				if (shot == 0 && b != 1)
+				{
+					break;
+				}
+
+				else if (shot == 1 && a != 10)
+				{
+					break;
+				}
+
+				else if (shot == 2 && b != 10)
+				{
+					break;
+				}
+
+				else if(shot == 3 && a!=1)
+				{
+					break;
+				}
+			}
+
+			switch (shot)
+			{
+			case 0:
+				y = b - 1;
+				x = a;
+				break;
+			case 1:
+				y = b;
+				x = a + 1;
+				break;
+			case 2:
+				y = b + 1;
+				x = a;
+				break;
+			case 3:
+				y = b;
+				x = a - 1;
+				break;
+			default:
+				//throw "Enemy's ships are defective";
+				break;
+			}
 			break;
 		}
-	}
 
-	else if (hit == 2)		//a != 0 && b != 0 && 
-	{
-		hit = 1;
-	}
-
-	else if (hit == 3)		//a != 0 && b != 0 && 
-	{
-		switch (direction)
+		else if (hit == 2)		//a != 0 && b != 0 && 
 		{
-		case 'u':
-			y = b - 1;
-			x = a;
-			break;
-		case 'r':
-			y = b;
-			x = a + 1;
-			break;
-		case 'd':
-			y = b + 1;
-			x = a;
-			break;
-		case 'l':
-			y = b;
-			x = a - 1;
-			break;
-		default:
-			//throw "Enemy's ships are defective";
-			break;
-
+			hit = 1;
+			continue;
 		}
-	}
+		/*
+			else if (hit == 3)		//a != 0 && b != 0 &&
+			{
+				switch (direction)
+				{
+				case 'u':
+					y = b - 1;
+					x = a;
+					break;
+				case 'r':
+					y = b;
+					x = a + 1;
+					break;
+				case 'd':
+					y = b + 1;
+					x = a;
+					break;
+				case 'l':
+					y = b;
+					x = a - 1;
+					break;
+				default:
+					//throw "Enemy's ships are defective";
+					break;
 
-	else if (hit == 4)
-	{
-		switch (direction)
+				}
+			}
+
+			else if (hit == 4)
+			{
+				switch (direction)
+				{
+				case 'u':
+					direction = 'd';
+					break;
+				case 'r':
+					direction = 'l';
+					break;
+				case 'd':
+					direction = 'u';
+					break;
+				case 'l':
+					direction = 'r';
+					break;
+				default:
+					//throw "Enemy's ships are defective";
+					break;
+
+				}
+			}
+		*/
+		else
 		{
-		case 'u':
-			direction = 'd';
+			y = rand() % 10 + 1;
+			x = rand() % 10 + 1;
 			break;
-		case 'r':
-			direction = 'l';
-			break;
-		case 'd':
-			direction = 'u';
-			break;
-		case 'l':
-			direction = 'r';
-			break;
-		default:
-			//throw "Enemy's ships are defective";
-			break;
-
 		}
-	}
-
-	else
-	{*/
-		y = rand() % 10 + 1;
-		x = rand() % 10 + 1;
-	//}
-
+	} while (true);
 	
 }
 
@@ -197,7 +226,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 			clone.field[y][x] = "+";
 		}
 		cout << "Good shot! Shoot again!" << endl;
-		Sleep(3000);
+		///////////////////////////////////////////////////////////////////////////////////////////Sleep(3000);
 	}
 
 	else
@@ -206,7 +235,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 		field[y][x] = "O";
 		clone.field[y][x] = "O";
 		cout << "You missed..." << endl;
-		Sleep(3000);
+		///////////////////////////////////////////////////////////////////////////////////////////Sleep(3000);
 	}
 }
 
@@ -268,11 +297,11 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetAB(x, y);
 				//hit.SetShootingDirection();
 			}
-			else if (hit.GetHitValue() == 2)
+			/*else if (hit.GetHitValue() == 2)
 			{
 				hit.SetHit(3);
 				//hit.SetShootingDirection();
-			}
+			}*/
 
 		}
 		cout << "You got hit by the enemy!" << endl;
@@ -286,7 +315,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 		if (hit.GetHitValue() == 1)
 		{
 			hit.SetHit(2);
-			hit.SetAB(x, y);
+			//hit.SetAB(x, y);
 		}
 		else if(hit.GetHitValue() == 3)
 		{
