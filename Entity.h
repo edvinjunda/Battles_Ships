@@ -65,8 +65,8 @@ void Bot::Shoot(int& x, int& y)
 		if (hit == 1)	
 		{
 
-			cout << 1 << endl;//////////////////////////////
-			cout << checker << " c" << endl;
+			/*cout << 1 << endl;//////////////////////////////
+			cout << checker << " c" << endl;*/
 			checker = 0;
 			int shot = 0;
 			
@@ -97,7 +97,6 @@ void Bot::Shoot(int& x, int& y)
 				y = b - 1;
 				x = a;
 				SetShootingDirection('u');
-
 				break;
 			case 1:
 				y = b;
@@ -116,7 +115,7 @@ void Bot::Shoot(int& x, int& y)
 				break;
 			default:
 				SetShootingDirection('o');
-				//throw "Enemy's ships are defective";
+				throw "Enemy's ships are defective";
 				break;
 			}
 			break;
@@ -124,19 +123,18 @@ void Bot::Shoot(int& x, int& y)
 
 		else if (hit == 2)		
 		{
-			cout << checker << " c" << endl;
+			/*cout << checker << " c" << endl;
+			cout << 2 << endl;*/
 			checker = 0;
-			cout << 2 << endl;//////////////////////////////
 			hit = 1;
 			continue;
 		}
 		else if (hit == 3)		
 		{
-			cout << checker << " c" << endl;
-			checker = 0;
+			/*cout << checker << " c" << endl;
 				cout << direction << endl;//////////////////////////////
-				Sleep(2000);//////////////////////////////
-
+				Sleep(2000);*/
+			checker = 0;
 				if (direction == 'u' && b == 1)
 				{
 					SetHitValue(4);//SetHitValue(0);
@@ -181,19 +179,19 @@ void Bot::Shoot(int& x, int& y)
 				x = a - 1;
 				break;
 			default:
-				//throw "Enemy's ships are defective";
+				throw "Enemy's ships are defective";
 				break;
 
 			}
-			system("pause");
+			//system("pause");
 		break;
 		}
 
 		else if (hit == 4)
 		{
 		checker++;
-		cout << 4 << ' ' << checker << endl;
-		system("pause");
+		/*cout << 4 << ' ' << checker << endl;
+		system("pause");*/
 			switch (direction)
 			{
 			case 'u':
@@ -213,7 +211,7 @@ void Bot::Shoot(int& x, int& y)
 				x = a - checker;
 				break;
 			default:
-				//throw "Enemy's ships are defective";
+				throw "Enemy's ships are defective";
 				direction = 'o';
 				break;
 			}
@@ -282,7 +280,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 			clone.field[y][x] = "+";
 		}
 		cout << "Good shot! Shoot again!" << endl;
-		///////////////////////////////////////////////////////////////////////////////////////////Sleep(3000);
+		Sleep(2000);
 	}
 
 	else
@@ -291,7 +289,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 		field[y][x] = "O";
 		clone.field[y][x] = "O";
 		cout << "You missed..." << endl;
-		///////////////////////////////////////////////////////////////////////////////////////////Sleep(3000);
+		Sleep(2000);
 	}
 }
 
@@ -356,8 +354,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			{
 				if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
 				{
-					cout << "3u" << endl;
-					system("pause");
+					/*cout << "3u" << endl;
+					system("pause");*/
 
 					hit.SetShootingDirection('d');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -367,8 +365,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 				else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][ x + 1] == "+"))
 				{
-					cout << "3r" << endl;
-					system("pause");
+					/*cout << "3r" << endl;
+					system("pause");*/
 
 					hit.SetShootingDirection('l');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -376,8 +374,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				}
 				else if (hit.GetShootingDirection() == 'd' && (field[y+1][x] == "O" || field[y+1][x] == "+"))
 				{
-					cout << "3d" << endl;
-					system("pause");
+					/*cout << "3d" << endl;
+					system("pause");*/
 
 					hit.SetShootingDirection('u');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -385,8 +383,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				}
 				else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
 				{
-					cout << "3l" << endl;
-					system("pause");
+					/*cout << "3l" << endl;
+					system("pause");*/
 
 					hit.SetShootingDirection('r');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -395,8 +393,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 				else
 				{
-					cout << "3o" << endl;
-					system("pause");
+					/*cout << "3o" << endl;
+					system("pause");*/
 
 					hit.SetAB(x, y);
 				}
@@ -412,7 +410,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetHitValue(0);
 				hit.SetAB(0, 0);
 				hit.SetShootingDirection('o');
-				//throw "Something went wrong at Entity.h 348 row 'else if (hit.GetHitValue() == 3)'
+				throw "Something went wrong at Entity.h 354 row 'else if (hit.GetHitValue() == 3)'";
 			}
 			
 		}
@@ -451,7 +449,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetShootingDirection('r');
 				break;
 			default:
-				//throw "Enemy's ships are defective";
+				throw "Enemy's ships are defective";
 				hit.SetAB(x, y);
 				hit.SetShootingDirection('o');
 				break;
@@ -460,8 +458,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 		else if (hit.GetHitValue() == 4)
 		{
-			cout << 4444 << endl;
-			system("pause");
+			/*cout << 4444 << endl;
+			system("pause");*/
 
 			field[y][x] = "~";
 			hit.SetHitValue(0);
@@ -469,7 +467,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			hit.SetShootingDirection('o');
 		}
 		cout << "Enemy missed" << endl;
-		//Sleep(2000);///////////////////////////////////////////////////////////////
+		Sleep(2000);
 	}
 
 	/*else if (field[y][x]=="+")
@@ -507,8 +505,8 @@ bool Player::RepeatedShot(int x, int y, Bot& hit)
 	{
 		if (hit.GetHitValue() == 3)
 		{
-			cout << "repeated " << 3 << endl;
-			system("pause");
+			/*cout << "repeated " << 3 << endl;
+			system("pause");*/
 
 			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
@@ -516,8 +514,8 @@ bool Player::RepeatedShot(int x, int y, Bot& hit)
 		}
 		else if (hit.GetHitValue() == 4 && field[y][x] == "O")
 		{
-			cout << "repeated " << 4 << endl;
-			system("pause");
+			/*cout << "repeated " << 4 << endl;
+			system("pause");*/
 
 			hit.SetHitValue(0); 
 			hit.SetAB(0, 0);

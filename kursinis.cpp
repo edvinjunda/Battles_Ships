@@ -53,7 +53,7 @@ int main()
 	bool one_more=0;
 	while (true)
 	{
-		/*do
+		do
 		{
 			system("cls");
 			visible_bot_field.ShowField();
@@ -83,7 +83,7 @@ int main()
 				break;
 			}
 			bot.GetShot(x, y, visible_bot_field, one_more);
-		} while (one_more);*/
+		} while (one_more);
 
 		do
 		{
@@ -92,12 +92,12 @@ int main()
 		player.ShowField();
 
 		cout << "Now it's enemy's turn to shoot!" << endl;
-		Sleep(1000);
+		Sleep(2000);
 		bot.Shoot(x, y);
-		cout << bot.GetHitValue() << " hit value" << endl;
+		//cout << bot.GetHitValue() << " hit value" << endl;
 		while (player.RepeatedShot(x,y,bot))
 		{
-			cout << bot.GetHitValue() <<" hit value"<< endl;
+			//cout << bot.GetHitValue() <<" hit value"<< endl;
 			bot.Shoot(x, y);
 		}
 		player.GetShot(x, y, bot, one_more);
