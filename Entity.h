@@ -37,24 +37,18 @@ void Entity::GetShot(int x, int y)
 	}
 }
 
-/*void Entity::Shoot(string **f)
-{
-	f[rand() % 10 + 1][rand() % 10 + 1] = "+";
-}*/
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Bot : public Entity
 {
 private:
-	int a, b, hit;
+	int a, b, hit,checker;
 	char direction;
 public:
-	Bot() : a(0), b(0), hit(0),direction('o') {}
+	Bot() : a(0), b(0), hit(0),checker(0),direction('o') {}
 	~Bot() {}
 public:
 	void Shoot(int& x, int& y);
-	void SetHit(int h);
+	void SetHitValue(int h);
 	void SetAB(int x, int y);
 	void SetShootingDirection(char d);
 	int GetHitValue();
@@ -68,9 +62,10 @@ void Bot::Shoot(int& x, int& y)
 {
 	while (true)
 	{
-		if (hit == 1)		//a != 0 && b != 0 && 
+		if (hit == 1)	
 		{
-			cout << 1 << endl;
+
+			cout << 1 << endl;//////////////////////////////
 			int shot = 0;
 
 			while (true)
@@ -100,6 +95,7 @@ void Bot::Shoot(int& x, int& y)
 				y = b - 1;
 				x = a;
 				SetShootingDirection('u');
+
 				break;
 			case 1:
 				y = b;
@@ -124,40 +120,41 @@ void Bot::Shoot(int& x, int& y)
 			break;
 		}
 
-		else if (hit == 2)		//a != 0 && b != 0 && 
+		else if (hit == 2)		
 		{
-			cout << 2 << endl;
+			cout << 2 << endl;//////////////////////////////
 			hit = 1;
 			continue;
 		}
-		else if (hit == 3)		//a != 0 && b != 0 &&
+		else if (hit == 3)		
 		{
-			
-				cout << 3 << endl;
-				
+				cout << direction << endl;//////////////////////////////
+				Sleep(2000);//////////////////////////////
+
 				if (direction == 'u' && b == 1)
 				{
-					SetHit(4);//SetShootingDirection('d');
-					break;
+					SetHitValue(4);//SetHitValue(0);
+					SetShootingDirection('d');
+					continue;
 				}
 				else if (direction == 'r' && a == 10)
 				{
-					SetHit(4);//SetShootingDirection('l');
-					break;
+					SetHitValue(4);//SetHitValue(0);
+					SetShootingDirection('l');
+					continue;
 				}
 				else if (direction == 'd' && b == 10)
 				{
-					SetHit(4);//SetShootingDirection('u');
-					break;
+					SetHitValue(4);//SetHitValue(0);
+					SetShootingDirection('u');
+					continue;
 				}
 				else if (direction == 'l' && a == 1)
 				{
-					SetHit(4); //SetShootingDirection('r');
-					break;
+					SetHitValue(4);//SetHitValue(0); 
+					SetShootingDirection('r');
+					continue;
 				}
-				system("pause");
-
-			cout << "33333333333333333333333333333333333333333333" << endl;
 			
 			switch (direction)
 			{
@@ -179,7 +176,6 @@ void Bot::Shoot(int& x, int& y)
 				break;
 			default:
 				//throw "Enemy's ships are defective";
-				SetShootingDirection('o');
 				break;
 
 			}
@@ -189,101 +185,49 @@ void Bot::Shoot(int& x, int& y)
 
 		else if (hit == 4)
 		{
-
-
+		checker++;
+		cout << 4 << ' ' << checker << endl;
+		system("pause");
 			switch (direction)
 			{
 			case 'u':
-				direction = 'd';
+				y = b - checker;
+				x = a;
 				break;
 			case 'r':
-				direction = 'l';
+				y = b;
+				x = a + checker;
 				break;
 			case 'd':
-				direction = 'u';
+				y = b + checker;
+				x = a;
 				break;
 			case 'l':
-				direction = 'r';
+				y = b;
+				x = a - checker;
 				break;
 			default:
 				//throw "Enemy's ships are defective";
+				direction = 'o';
 				break;
 			}
-			/*
-		if (hit.GetShootingDirection() == 'u')
-		{
+			break;
 
 		}
 
-		else if (field[y + 1][x] != "#" && hit.GetShootingDirection() == 'u')
-		{
-
-		}
-
-		switch (hit.GetShootingDirection())
-		{
-		case 'u':
-			if (field[y + 1][x] != "#")
-
-			break;
-		case 'r':
-
-			break;
-		case 'd':
-
-			break;
-		case 'l':
-
-			break;
-		default:
-			//throw "Enemy's ships are defective";
-			hit.SetShootingDirection('o');
-			break;
-
-		}*/
-		//if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
-
-		//hit.SetHit(3);
-
-		}////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		
-		/*
-			else if (hit == 4)
-			{
-				switch (direction)
-				{
-				case 'u':
-					direction = 'd';
-					break;
-				case 'r':
-					direction = 'l';
-					break;
-				case 'd':
-					direction = 'u';
-					break;
-				case 'l':
-					direction = 'r';
-					break;
-				default:
-					//throw "Enemy's ships are defective";
-					break;
-
-				}
-			}
-		*/
 		else
 		{
 			y = rand() % 10 + 1;
 			x = rand() % 10 + 1;
-			SetShootingDirection('o');
+			direction = 'o';
+			hit = 0;
 			break;
 		}
 	}
 	
 }
 
-void Bot::SetHit(int h)
+void Bot::SetHitValue(int h)
 {
 	hit = h;
 }
@@ -361,7 +305,7 @@ class Player : public Entity
 public:
 	void Shoot(int& x, int& y);
 	void GetShot(int x, int y, Bot& hit, bool& one_more);
-	bool RepeatedShot(int x, int y);
+	bool RepeatedShot(int x, int y, Bot& hit);
 };
 
 void Player::Shoot(int& x, int& y)
@@ -386,7 +330,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			field[y][x + 1] != "+")
 		{
 			field[y][x] = "X";
-			hit.SetHit(0);
+			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
 		}
 		else
@@ -394,47 +338,169 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			field[y][x] = "+";
 			if (hit.GetHitValue() == 0)
 			{
-				hit.SetHit(1);
+				hit.SetHitValue(1);
 				hit.SetAB(x,y);
 			}
 			else if (hit.GetHitValue() == 1)
 			{
-				hit.SetHit(3);
+				hit.SetHitValue(3);
 				hit.SetAB(x, y);
 			}
-
 			else if (hit.GetHitValue() == 3)
 			{
-				hit.SetAB(x, y);
+				if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
+				{
+					cout << "3u" << endl;
+					system("pause");
+
+					hit.SetShootingDirection('d');
+					hit.SetHitValue(4);//hit.SetHitValue(0);
+					hit.SetAB(x, y);//hit.SetAB(0, 0);
+					
+				}
+
+				else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][ x + 1] == "+"))
+				{
+					cout << "3r" << endl;
+					system("pause");
+
+					hit.SetShootingDirection('l');
+					hit.SetHitValue(4);//hit.SetHitValue(0);
+					hit.SetAB(x, y);//hit.SetAB(0, 0);
+				}
+				else if (hit.GetShootingDirection() == 'd' && (field[y+1][x] == "O" || field[y+1][x] == "+"))
+				{
+					cout << "3d" << endl;
+					system("pause");
+
+					hit.SetShootingDirection('u');
+					hit.SetHitValue(4);//hit.SetHitValue(0);
+					hit.SetAB(x, y);//hit.SetAB(0, 0);
+				}
+				else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
+				{
+					cout << "3l" << endl;
+					system("pause");
+
+					hit.SetShootingDirection('r');
+					hit.SetHitValue(4);//hit.SetHitValue(0);
+					hit.SetAB(x, y);//hit.SetAB(0, 0);
+				}
+
+				else
+				{
+					cout << "3o" << endl;
+					system("pause");
+
+					hit.SetAB(x, y);
+				}
+				
+			}
+			else if(hit.GetHitValue()==4)
+			{
+				hit.SetHitValue(3);
+			}
+
+			else
+			{
+				hit.SetHitValue(0);
+				hit.SetAB(0, 0);
+				hit.SetShootingDirection('o');
+				//throw "Something went wrong at Entity.h 348 row 'else if (hit.GetHitValue() == 3)'
 			}
 			
-
 		}
+
 		cout << "You got hit by the enemy!" << endl;
-		Sleep(2500);
+		Sleep(2000);
 	}
 
-	else
+	else //if(field[y][x] == "~")
 	{
 		one_more = 0;
 		field[y][x] = "O";
 		if (hit.GetHitValue() == 1)
 		{
-			hit.SetHit(2);
+			hit.SetHitValue(2);
 		}
 		else if(hit.GetHitValue() == 3)
 		{
-			hit.SetHit(4);
+			hit.SetHitValue(4);//hit.SetHitValue(0);
+			switch (hit.GetShootingDirection())
+			{
+			case 'u':
+				hit.SetAB(x, y + 1);
+				hit.SetShootingDirection('d');
+				break;
+			case 'r':
+				hit.SetAB(x - 1, y);
+				hit.SetShootingDirection('l');
+				break;
+			case 'd':
+				hit.SetAB(x, y - 1);
+				hit.SetShootingDirection('u');
+				break;
+			case 'l':
+				hit.SetAB(x + 1, y);
+				hit.SetShootingDirection('r');
+				break;
+			default:
+				//throw "Enemy's ships are defective";
+				hit.SetAB(x, y);
+				hit.SetShootingDirection('o');
+				break;
+			}
 		}
+
 		cout << "Enemy missed" << endl;
-		Sleep(2500);
+		//Sleep(2000);///////////////////////////////////////////////////////////////
 	}
+
+	/*else if (field[y][x]=="+")
+	{
+		if (hit.GetHitValue() == 4)
+		{
+			if (hit.GetShootingDirection() == 'u')
+			{
+				if(field[y-1][x] == "~")
+					hit.SetHitValue(0);
+
+
+			}
+			else if (hit.GetShootingDirection() == 'r')
+			{
+				hit.SetHitValue(0);
+
+			}
+			else if (hit.GetShootingDirection() == 'd')
+			{
+				hit.SetHitValue(0);
+
+			}
+			else if (hit.GetShootingDirection() == 'l')
+			{
+				hit.SetHitValue(0);
+			}
+		}
+	}*/
 }
 
-bool Player::RepeatedShot(int x, int y)
+bool Player::RepeatedShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
+		if (hit.GetHitValue() == 1)//////////////////////////zapasny, jesli wyjdzie prydumac hit 4 schemu, to tady pa idzieji ety nebudzie nuzen
+		{
+			hit.SetHitValue(0);
+		}
+		else if (hit.GetHitValue() == 3)
+		{
+			hit.SetHitValue(0);
+		}
+		/*else if (hit.GetHitValue() == 4)
+		{
+			;
+		}*/
 		return true;
 	}
 	return false;

@@ -1,13 +1,20 @@
+pazniej metady ispolzujemyje w adzinakavava klasa metadach perarabic na kintamuosius ( vmesto SetShootingDirection napisac direction=...)
 niekataryje teksty mozna zrabic const
 wsie funkcyji i metady perapisac w addzielnyje faily
 exceptiony zrabic tam gdzie sztota moze pajci nie tak nie pa majej winie (adzin jest w entity 90 eil)
-hit=0 -> nie byla papadanij | 
+hit=0 -> stryla w lubuju toczku | 
 hit=1 -> bylo papadanije, dalej ugadywac |
 hit=2 -> bylo papadanije, ale dalej nie ugadal |
 hit=3 -> pradalzac strelbu |
 hit=4 -> strelac w apredzielonuje naprawlenije |
 
+
+
+player.RepeatedShot wpisan if(hit = 1) , jesli wyjdzie ustanawic hit 4 mechanizm to ety praweryc cy stoit astawlac
+
 tam gdzie ///////////////////////////////////////////////////////////////////////////////////////////
 pazniej ich skasawac kab sleep rabotal
+
+wsiem sleep funkcyjam w entity i musi field headerach ustanawic 2000 ms
 
 w kance probywac zrabic kab polnascju dabityje karabli byliby czerwonymi
