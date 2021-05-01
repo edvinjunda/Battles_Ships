@@ -26,11 +26,10 @@ private:
 	void UnvalidVerticalPlacement(int& x, int& y, int blocks);
 };
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Field::Field()
 {
-	field = new string* [12];
+	field = new string * [12];
 	for (int i = 0; i < 12; i++)
 		field[i] = new string[12];
 
@@ -59,7 +58,7 @@ void Field::ShowField()
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	for (int i = 0; i < 10; i++)
 		cout << ' ' << i;
-	cout <<' '<<"x axis"<< endl;
+	cout << ' ' << "x axis" << endl;
 
 	for (int i = 1; i < 11; i++)
 	{
@@ -70,7 +69,7 @@ void Field::ShowField()
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 			cout << '|';
-			if(field[i][j]=="~")												//vanduo
+			if (field[i][j] == "~")												//vanduo
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
 			else if (field[i][j] == "#")										//laivo sveikoji dalis
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
@@ -87,12 +86,12 @@ void Field::ShowField()
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		cout << '|' << endl;
 	}
-	
+
 	cout << "y axis" << endl << endl;
 
 }
 
-void Field::operator++()									
+void Field::operator++()
 {
 
 
@@ -127,7 +126,7 @@ void Field::operator++()
 				int x = rand() % 10 + 1;
 				for (int i = y - 1; i < y + blocks + 1; i++)
 				{
-					if (field[i][x-1] == "#" || field[i][x] == "#" || field[i][x+1] == "#")
+					if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
 					{
 						y = rand() % (11 - blocks) + 1;
 						x = rand() % 10 + 1;
@@ -149,7 +148,7 @@ void Field::operator++()
 
 void Field::operator ++(int)
 {
-	int ships = 1, blocks = 4,placed_ships=0;
+	int ships = 1, blocks = 4, placed_ships = 0;
 
 	for (int j = 0; j < 4; j++)
 	{
@@ -157,7 +156,7 @@ void Field::operator ++(int)
 		//cout << "If you want put ship horizontally, it will go rightwards from x y coordinates" << endl;
 		//cout << "If you want put ship vertically, it will go downwards from x y coordinates." << endl;
 		//cout << "Remember, place ships in a way to not collide them!" << endl;
-		
+
 		for (int l = 0; l < ships; l++)
 		{
 			system("cls");
@@ -169,82 +168,82 @@ void Field::operator ++(int)
 			cout << "In order to place ship horizontally, type h/H" << endl;
 			cout << "In order to place ship vertically, type v/V" << endl;
 
-				char direction;
-				while (true)
+			char direction;
+			while (true)
+			{
+				int x, y;
+				cin >> direction;
+				if (direction == 'h' || direction == 'H')					//horizontal
 				{
-					int x, y;
-					cin >> direction;
-					if (direction == 'h' || direction == 'H')					//horizontal
+					cout << "Enter x and y coordinates: ";
+					cin >> x >> y;
+
+					UnvalidHorizontalPlacement(x, y, blocks);
+					x++;
+					y++;
+
+					for (int i = x - 1; i < x + blocks + 1; i++)
 					{
-						cout << "Enter x and y coordinates: ";
-						cin >> x >> y;
-
-						UnvalidHorizontalPlacement(x, y, blocks);
-						x++;
-						y++;
-
-						for (int i = x - 1; i < x + blocks + 1; i++)
+						if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
 						{
-							if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
-							{
-								cout << "Ship which you want to place will collide with another ship!" << endl;
-								cout << "Enter other x coordinate: " << endl;
-								cin >> x >> y;
+							cout << "Ship which you want to place will collide with another ship!" << endl;
+							cout << "Enter other x coordinate: " << endl;
+							cin >> x >> y;
 
-								UnvalidHorizontalPlacement(x, y, blocks);
-								x++;
-								y++;
+							UnvalidHorizontalPlacement(x, y, blocks);
+							x++;
+							y++;
 
-								i = x - 2;
-							}
+							i = x - 2;
 						}
-
-						for (int i = x; i < x + blocks; i++)
-						{
-							field[y][i] = "#";
-						}
-
-						break;
 					}
 
-					else if (direction == 'v' || direction == 'V')					//vertical
+					for (int i = x; i < x + blocks; i++)
 					{
-						cout << "Enter x and y coordinates: ";
-						cin >> x >> y;
-
-						UnvalidVerticalPlacement(x, y, blocks);
-						x++;
-						y++;
-
-						for (int i = y - 1; i < y + blocks + 1; i++)
-						{
-							if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
-							{
-								cout << "Ship which you want to place will collide with another ship!" << endl;
-								cout << "Enter other y coordinate: " << endl;
-								cin >> x >> y;
-
-								UnvalidVerticalPlacement(x, y, blocks);
-								x++;
-								y++;
-
-								i = y - 2;
-							}
-						}
-
-						for (int i = y; i < y + blocks; i++)
-						{
-							field[i][x] = "#";
-						}
-						break;
+						field[y][i] = "#";
 					}
 
-					else
-					{
-						cout << "Enter correct direction!" << endl;
-					}
+					break;
 				}
-				placed_ships++;
+
+				else if (direction == 'v' || direction == 'V')					//vertical
+				{
+					cout << "Enter x and y coordinates: ";
+					cin >> x >> y;
+
+					UnvalidVerticalPlacement(x, y, blocks);
+					x++;
+					y++;
+
+					for (int i = y - 1; i < y + blocks + 1; i++)
+					{
+						if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
+						{
+							cout << "Ship which you want to place will collide with another ship!" << endl;
+							cout << "Enter other y coordinate: " << endl;
+							cin >> x >> y;
+
+							UnvalidVerticalPlacement(x, y, blocks);
+							x++;
+							y++;
+
+							i = y - 2;
+						}
+					}
+
+					for (int i = y; i < y + blocks; i++)
+					{
+						field[i][x] = "#";
+					}
+					break;
+				}
+
+				else
+				{
+					cout << "Enter correct direction!" << endl;
+				}
+			}
+			placed_ships++;
 		}
 		ships++;
 		blocks--;
@@ -289,3 +288,6 @@ void Field::UnvalidVerticalPlacement(int& x, int& y, int blocks)
 			break;
 	}
 }
+
+
+

@@ -11,19 +11,17 @@ using namespace std;
 class Entity : public Field
 {
 protected:
-	int laivai;
+	int laivu_taskai;
 public:
 	Entity();
 	virtual ~Entity();
 public:
 	//virtual void Shoot()=0;
 	virtual void GetShot(int x, int y);
-	//virtual void Shoot(string **f);
-
-
+	virtual void operator --();
 };
 
-Entity::Entity() : laivai(10){}
+Entity::Entity() :laivu_taskai(20){}
 Entity::~Entity(){}
 
 void Entity::GetShot(int x, int y)
@@ -35,6 +33,11 @@ void Entity::GetShot(int x, int y)
 	{
 		field[y][x] = "O";
 	}
+}
+
+void Entity::operator --()
+{
+	laivu_taskai--;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,6 +58,7 @@ public:
 	char GetShootingDirection();
 	void GetShot(int x, int y, Bot &clone, bool& one_more);
 	bool RepeatedShot(int x, int y);
+	void operator --();
 
 };
 
@@ -96,25 +100,25 @@ void Bot::Shoot(int& x, int& y)
 			case 0:
 				y = b - 1;
 				x = a;
-				SetShootingDirection('u');
+				direction='u';
 				break;
 			case 1:
 				y = b;
 				x = a + 1;
-				SetShootingDirection('r');
+				direction = 'r';
 				break;
 			case 2:
 				y = b + 1;
 				x = a;
-				SetShootingDirection('d');
+				direction = 'd';
 				break;
 			case 3:
 				y = b;
 				x = a - 1;
-				SetShootingDirection('l');
+				direction = 'l';
 				break;
 			default:
-				SetShootingDirection('o');
+				direction = 'o';
 				throw "Enemy's ships are defective";
 				break;
 			}
@@ -137,26 +141,26 @@ void Bot::Shoot(int& x, int& y)
 			checker = 0;
 				if (direction == 'u' && b == 1)
 				{
-					SetHitValue(4);//SetHitValue(0);
-					SetShootingDirection('d');
+					hit=4;//SetHitValue(0);
+					direction='d';
 					continue;
 				}
 				else if (direction == 'r' && a == 10)
 				{
-					SetHitValue(4);//SetHitValue(0);
-					SetShootingDirection('l');
+					hit = 4;//SetHitValue(0);
+					direction = 'l';
 					continue;
 				}
 				else if (direction == 'd' && b == 10)
 				{
-					SetHitValue(4);//SetHitValue(0);
-					SetShootingDirection('u');
+					hit = 4;//SetHitValue(0);
+					direction = 'u';
 					continue;
 				}
 				else if (direction == 'l' && a == 1)
 				{
-					SetHitValue(4);//SetHitValue(0); 
-					SetShootingDirection('r');
+					hit = 4;//SetHitValue(0);
+					direction = 'r';
 					continue;
 				}
 			
@@ -279,6 +283,8 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 			field[y][x] = "+";
 			clone.field[y][x] = "+";
 		}
+
+		--clone;
 		cout << "Good shot! Shoot again!" << endl;
 		Sleep(2000);
 	}
@@ -303,6 +309,11 @@ bool Bot::RepeatedShot(int x, int y)
 	return false;
 }
 
+void Bot::operator --()
+{
+	laivu_taskai--;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Player : public Entity
 {
@@ -310,6 +321,7 @@ public:
 	void Shoot(int& x, int& y);
 	void GetShot(int x, int y, Bot& hit, bool& one_more);
 	bool RepeatedShot(int x, int y, Bot& hit);
+	void operator --();
 };
 
 void Player::Shoot(int& x, int& y)
@@ -415,6 +427,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			
 		}
 
+		--hit;
 		cout << "You got hit by the enemy!" << endl;
 		Sleep(2000);
 	}
@@ -524,4 +537,9 @@ bool Player::RepeatedShot(int x, int y, Bot& hit)
 		return true;
 	}
 	return false;
+}
+
+void Player::operator --()
+{
+	laivu_taskai--;
 }
