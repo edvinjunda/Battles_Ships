@@ -9,9 +9,6 @@ hit=3 -> pradalzac strelbu |
 hit=4 -> strelac w apredzielonuje naprawlenije |
 
 
-
-player.RepeatedShot wpisan if(hit = 1) , jesli wyjdzie ustanawic hit 4 mechanizm to ety praweryc cy stoit astawlac
-
 tam gdzie ///////////////////////////////////////////////////////////////////////////////////////////
 pazniej ich skasawac kab sleep rabotal
 

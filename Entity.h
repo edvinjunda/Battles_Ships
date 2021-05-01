@@ -66,8 +66,10 @@ void Bot::Shoot(int& x, int& y)
 		{
 
 			cout << 1 << endl;//////////////////////////////
+			cout << checker << " c" << endl;
+			checker = 0;
 			int shot = 0;
-
+			
 			while (true)
 			{
 				shot = rand() % 4;
@@ -122,12 +124,16 @@ void Bot::Shoot(int& x, int& y)
 
 		else if (hit == 2)		
 		{
+			cout << checker << " c" << endl;
+			checker = 0;
 			cout << 2 << endl;//////////////////////////////
 			hit = 1;
 			continue;
 		}
 		else if (hit == 3)		
 		{
+			cout << checker << " c" << endl;
+			checker = 0;
 				cout << direction << endl;//////////////////////////////
 				Sleep(2000);//////////////////////////////
 
@@ -452,6 +458,16 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			}
 		}
 
+		else if (hit.GetHitValue() == 4)
+		{
+			cout << 4444 << endl;
+			system("pause");
+
+			field[y][x] = "~";
+			hit.SetHitValue(0);
+			hit.SetAB(0, 0);
+			hit.SetShootingDirection('o');
+		}
 		cout << "Enemy missed" << endl;
 		//Sleep(2000);///////////////////////////////////////////////////////////////
 	}
@@ -489,18 +505,24 @@ bool Player::RepeatedShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
-		if (hit.GetHitValue() == 1)//////////////////////////zapasny, jesli wyjdzie prydumac hit 4 schemu, to tady pa idzieji ety nebudzie nuzen
+		if (hit.GetHitValue() == 3)
 		{
+			cout << "repeated " << 3 << endl;
+			system("pause");
+
 			hit.SetHitValue(0);
+			hit.SetAB(0, 0);
+			hit.SetShootingDirection('o');
 		}
-		else if (hit.GetHitValue() == 3)
+		else if (hit.GetHitValue() == 4 && field[y][x] == "O")
 		{
-			hit.SetHitValue(0);
+			cout << "repeated " << 4 << endl;
+			system("pause");
+
+			hit.SetHitValue(0); 
+			hit.SetAB(0, 0);
+			hit.SetShootingDirection('o');
 		}
-		/*else if (hit.GetHitValue() == 4)
-		{
-			;
-		}*/
 		return true;
 	}
 	return false;
