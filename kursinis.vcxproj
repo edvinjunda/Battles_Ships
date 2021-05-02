@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Field.h" />
-    <ClInclude Include="Menu.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

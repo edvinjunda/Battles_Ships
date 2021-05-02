@@ -3,6 +3,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <iostream>
+#include <conio.h>
 #include "Field.h"
 
 using namespace std;
@@ -11,18 +12,23 @@ using namespace std;
 class Entity : public Field
 {
 protected:
-	int laivu_taskai;
+	int ship_points;
 public:
 	Entity();
 	virtual ~Entity();
 public:
 	//virtual void Shoot()=0;
+	int GetShipPoints();
 	virtual void GetShot(int x, int y);
-	virtual void operator --();
 };
 
-Entity::Entity() :laivu_taskai(20){}
+Entity::Entity() :ship_points(20){}
 Entity::~Entity(){}
+
+int Entity::GetShipPoints()
+{
+	return ship_points;
+}
 
 void Entity::GetShot(int x, int y)
 {
@@ -35,16 +41,11 @@ void Entity::GetShot(int x, int y)
 	}
 }
 
-void Entity::operator --()
-{
-	laivu_taskai--;
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Bot : public Entity
 {
 private:
-	int a, b, hit,checker;
+	int a, b, hit, checker;
 	char direction;
 public:
 	Bot() : a(0), b(0), hit(0),checker(0),direction('o') {}
@@ -58,7 +59,6 @@ public:
 	char GetShootingDirection();
 	void GetShot(int x, int y, Bot &clone, bool& one_more);
 	bool RepeatedShot(int x, int y);
-	void operator --();
 
 };
 
@@ -284,7 +284,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 			clone.field[y][x] = "+";
 		}
 
-		--clone;
+		ship_points--;
 		cout << "Good shot! Shoot again!" << endl;
 		Sleep(2000);
 	}
@@ -309,11 +309,6 @@ bool Bot::RepeatedShot(int x, int y)
 	return false;
 }
 
-void Bot::operator --()
-{
-	laivu_taskai--;
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Player : public Entity
 {
@@ -321,7 +316,6 @@ public:
 	void Shoot(int& x, int& y);
 	void GetShot(int x, int y, Bot& hit, bool& one_more);
 	bool RepeatedShot(int x, int y, Bot& hit);
-	void operator --();
 };
 
 void Player::Shoot(int& x, int& y)
@@ -427,7 +421,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			
 		}
 
-		--hit;
+		ship_points--;
 		cout << "You got hit by the enemy!" << endl;
 		Sleep(2000);
 	}
@@ -479,8 +473,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');
 		}
-		cout << "Enemy missed" << endl;
-		Sleep(2000);
+		////////////////////////////////////////cout << "Enemy missed" << endl;
+		////////////////////////////////////////Sleep(2000);
 	}
 
 	/*else if (field[y][x]=="+")
@@ -537,9 +531,4 @@ bool Player::RepeatedShot(int x, int y, Bot& hit)
 		return true;
 	}
 	return false;
-}
-
-void Player::operator --()
-{
-	laivu_taskai--;
 }

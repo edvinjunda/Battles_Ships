@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <conio.h>
 
 using namespace std;
 
@@ -18,7 +19,10 @@ void UnvalidCoordinates(int& x, int& y)
 			IgnoreLine();
 
 			cout << "Enter valid coordinates!" << endl;
-			cin >> x >> y;
+			x = _getch();
+			cout << ' ';
+			y = _getch();
+			//cin >> x >> y;
 		}
 
 		else

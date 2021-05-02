@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <iostream>
 #include <Windows.h>
+#include <conio.h>
 #include "Entity.h"
 #include "Field.h"
 #include "Utilities.h"
@@ -25,7 +26,7 @@ int main()
 		cout << "If you want place ships manually, enter m/M" << endl;
 		cout << "If you want place ships randomly, enter r/R" << endl;
 		char choice;
-		cin >> choice;
+		choice = _getch();
 		if (choice == 'm' || choice == 'M')
 		{
 			player++; 
@@ -49,7 +50,7 @@ int main()
 
 
 		//Sleep(2000);cin.fail()
-	int x, y;
+	/*int x, y;
 	bool one_more=0;
 	while (true)
 	{
@@ -83,6 +84,11 @@ int main()
 				break;
 			}
 			bot.GetShot(x, y, visible_bot_field, one_more);
+			if (bot.GetShipPoints())
+			{
+				cout << "You won!" << endl;
+				break;
+			}
 		} while (one_more);
 
 		do
@@ -101,10 +107,19 @@ int main()
 			bot.Shoot(x, y);
 		}
 		player.GetShot(x, y, bot, one_more);
+		Sleep(1000);
+		if (player.GetShipPoints()==0)
+		{
+			break;
+		}
 		} while (one_more);
-	
+		if (player.GetShipPoints() == 0)
+		{
+			cout << "You lost!" << endl;
+			break;
+		}
 		
-	}
+	}*/
 	return 0;
 }
 
