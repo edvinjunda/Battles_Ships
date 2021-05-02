@@ -1,5 +1,8 @@
-TERAZ RABIC:menu, zapis igrawych ischodaw
-potem: algarytm pa katorym karabal nie budzie strylac bliska ubitych karablej, rasmatrec mechanizm strelby bota if hit == 4 (sluczajeca ze nie dabiwaje karabal)
+TERAZ RABIC: kab wsio wywadzila na ekran z odstupam i cwetnyje teksty
+
+potem:algarytm pa katorym karabal nie budzie strylac bliska ubitych karablej, rasmatrec mechanizm strelby bota if hit == 4 (sluczajeca ze nie dabiwaje karabal)
+
+praweryc:  zapis igrawych ischodaw
 
 hit=0 -> stryla w lubuju toczku | 
 hit=1 -> bylo papadanije, dalej ugadywac |

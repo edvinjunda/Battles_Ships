@@ -93,8 +93,6 @@ void Field::ShowField()
 
 void Field::operator++()
 {
-
-
 	int ships = 1, blocks = 4;
 	for (int j = 0; j < 4; j++)
 	{
@@ -172,7 +170,8 @@ void Field::operator ++(int)
 			while (true)
 			{
 				int x, y;
-				cin >> direction;
+				//cin >> direction;
+				direction = _getch();
 				if (direction == 'h' || direction == 'H')					//horizontal
 				{
 					cout << "Enter x and y coordinates: ";
@@ -187,7 +186,7 @@ void Field::operator ++(int)
 						if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
 						{
 							cout << "Ship which you want to place will collide with another ship!" << endl;
-							cout << "Enter other x coordinate: " << endl;
+							cout << "Enter other coordinates: " << endl;
 							cin >> x >> y;
 
 							UnvalidHorizontalPlacement(x, y, blocks);
@@ -220,7 +219,7 @@ void Field::operator ++(int)
 						if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
 						{
 							cout << "Ship which you want to place will collide with another ship!" << endl;
-							cout << "Enter other y coordinate: " << endl;
+							cout << "Enter other coordinates: " << endl;
 							cin >> x >> y;
 
 							UnvalidVerticalPlacement(x, y, blocks);
@@ -266,7 +265,6 @@ void Field::UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 			cout << "Enter valid coordinates!" << endl;
 			cin >> x >> y;
 		}
-
 		else
 			break;
 	}
@@ -283,7 +281,6 @@ void Field::UnvalidVerticalPlacement(int& x, int& y, int blocks)
 			cout << "Enter valid coordinates!" << endl;
 			cin >> x >> y;
 		}
-
 		else
 			break;
 	}

@@ -14,39 +14,56 @@
 #include "Entity.h"
 #include "Field.h"
 #include "Utilities.h"
+#include "UI.h"
 
 int main()
 {
+	UI* ui[2];
+	ui[0] = new Menu;
+	ui[1] = new Files;
 
-	Player player;
-	Bot bot,visible_bot_field;
-
+	Menu* menu = dynamic_cast<Menu*>(ui[0]);
+	Files* file = dynamic_cast<Files*>(ui[1]);
 	while (true)
 	{
-		cout << "If you want place ships manually, enter m/M" << endl;
-		cout << "If you want place ships randomly, enter r/R" << endl;
-		char choice;
-		choice = _getch();
-		if (choice == 'm' || choice == 'M')
+		system("cls");
+
+		Player player;
+		Bot bot, visible_bot_field;
+
+		ui[0]->Visualize();
+
+		char option;
+		option = _getch();
+
+		switch (option)
 		{
-			player++; 
+		case '1':
+			system("cls");
+			menu->Choose(bot,player);
+			menu->Play(bot,visible_bot_field,player);
+			break;
+		case '2':
+			file->GameGuide();
+			break;
+		case '3':
+			ui[1]->Visualize();
+			break;
+		case '4':
+			exit(0);
+			break;
+		case 27:
+			exit(0);
+			break;
+		default:
+			cout << "Uncorrect choice!" << endl;
+			Sleep(1000);
 			system("cls");
 			break;
 		}
-		else if (choice == 'r' || choice == 'R')
-		{
-			++player;
-			system("cls");
-			break;
-		}
-		else
-		{
-			system("cls");
-			cout << "Enter valid letter!" << endl;
-			
-		}
+
 	}
-	++bot;
+	
 
 
 		//Sleep(2000);cin.fail()
@@ -74,8 +91,7 @@ int main()
 				y++;
 				break;
 			}
-			while
-			(bot.RepeatedShot(x, y))
+			while(bot.RepeatedShot(x, y))
 			{
 				player.Shoot(x, y);
 				UnvalidCoordinates(x, y);
@@ -83,13 +99,20 @@ int main()
 				y++;
 				break;
 			}
+
 			bot.GetShot(x, y, visible_bot_field, one_more);
-			if (bot.GetShipPoints())
+			if (bot.GetShipPoints()==0)
 			{
-				cout << "You won!" << endl;
 				break;
 			}
 		} while (one_more);
+
+		if (bot.GetShipPoints() == 0)
+		{
+			cout << "You won!" << endl;
+			break;
+		}
+
 
 		do
 		{
@@ -106,6 +129,7 @@ int main()
 			//cout << bot.GetHitValue() <<" hit value"<< endl;
 			bot.Shoot(x, y);
 		}
+
 		player.GetShot(x, y, bot, one_more);
 		Sleep(1000);
 		if (player.GetShipPoints()==0)
@@ -113,6 +137,7 @@ int main()
 			break;
 		}
 		} while (one_more);
+
 		if (player.GetShipPoints() == 0)
 		{
 			cout << "You lost!" << endl;
@@ -120,6 +145,7 @@ int main()
 		}
 		
 	}*/
+
 	return 0;
 }
 
