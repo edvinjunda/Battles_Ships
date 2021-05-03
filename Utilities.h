@@ -18,7 +18,7 @@ void UnvalidCoordinates(int& x, int& y)
 		{
 			IgnoreLine();
 
-			cout << "Enter valid coordinates!" << endl;
+			cout << "  Enter valid coordinates!" << endl;
 			cin >> x >> y;
 		}
 

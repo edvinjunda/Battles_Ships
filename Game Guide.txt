@@ -1,1 +1,3 @@
-asd
+  If you want put ship horizontally, it will go rightwards from x y coordinates
+  If you want put ship vertically, it will go downwards from x y coordinates.
+  Remember, place ships in a way to not collide them!

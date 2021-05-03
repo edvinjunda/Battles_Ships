@@ -119,7 +119,7 @@ void Bot::Shoot(int& x, int& y)
 				break;
 			default:
 				direction = 'o';
-				throw "Enemy's ships are defective";
+				throw "  Enemy's ships are defective";
 				break;
 			}
 			break;
@@ -183,7 +183,7 @@ void Bot::Shoot(int& x, int& y)
 				x = a - 1;
 				break;
 			default:
-				throw "Enemy's ships are defective";
+				throw "  Enemy's ships are defective";
 				break;
 
 			}
@@ -215,7 +215,7 @@ void Bot::Shoot(int& x, int& y)
 				x = a - checker;
 				break;
 			default:
-				throw "Enemy's ships are defective";
+				throw "  Enemy's ships are defective";
 				direction = 'o';
 				break;
 			}
@@ -285,7 +285,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 		}
 
 		ship_points--;
-		cout << "Good shot! Shoot again!" << endl;
+		cout << "  Good shot! Shoot again!" << endl;
 		Sleep(2000);
 	}
 
@@ -294,7 +294,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 		one_more = 0;
 		field[y][x] = "O";
 		clone.field[y][x] = "O";
-		cout << "You missed..." << endl;
+		cout << "  You missed..." << endl;
 		Sleep(2000);
 	}
 }
@@ -303,7 +303,7 @@ bool Bot::RepeatedShot(int x, int y)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
-		cout << "You already shoot here, choose another position!" << endl;
+		cout << "  You already shoot here, choose another position!" << endl;
 		return true;
 	}
 	return false;
@@ -320,8 +320,8 @@ public:
 
 void Player::Shoot(int& x, int& y)
 {
-	cout << "Your turn to shoot!" << endl;
-	cout << "Enter x and y coordinates: " << endl;
+	cout << "  Your turn to shoot!" << endl;
+	cout << "  Enter x and y coordinates: ";
 	cin >> x >> y;
 }
 
@@ -416,13 +416,13 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetHitValue(0);
 				hit.SetAB(0, 0);
 				hit.SetShootingDirection('o');
-				throw "Something went wrong at Entity.h 354 row 'else if (hit.GetHitValue() == 3)'";
+				throw "  Something went wrong at Entity.h 354 row 'else if (hit.GetHitValue() == 3)'";
 			}
 			
 		}
 
 		ship_points--;
-		cout << "You got hit by the enemy!" << endl;
+		cout << "  You got hit by the enemy!" << endl;
 		Sleep(2000);
 	}
 
@@ -456,7 +456,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetShootingDirection('r');
 				break;
 			default:
-				throw "Enemy's ships are defective";
+				throw "  Enemy's ships are defective";
 				hit.SetAB(x, y);
 				hit.SetShootingDirection('o');
 				break;
@@ -476,34 +476,6 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 		////////////////////////////////////////cout << "Enemy missed" << endl;
 		////////////////////////////////////////Sleep(2000);
 	}
-
-	/*else if (field[y][x]=="+")
-	{
-		if (hit.GetHitValue() == 4)
-		{
-			if (hit.GetShootingDirection() == 'u')
-			{
-				if(field[y-1][x] == "~")
-					hit.SetHitValue(0);
-
-
-			}
-			else if (hit.GetShootingDirection() == 'r')
-			{
-				hit.SetHitValue(0);
-
-			}
-			else if (hit.GetShootingDirection() == 'd')
-			{
-				hit.SetHitValue(0);
-
-			}
-			else if (hit.GetShootingDirection() == 'l')
-			{
-				hit.SetHitValue(0);
-			}
-		}
-	}*/
 }
 
 bool Player::RepeatedShot(int x, int y, Bot& hit)

@@ -39,7 +39,6 @@ int main()
 		switch (option)
 		{
 		case '1':
-			system("cls");
 			menu->Choose(bot,player);
 			menu->Play(bot,visible_bot_field,player);
 			break;
@@ -56,12 +55,11 @@ int main()
 			exit(0);
 			break;
 		default:
-			cout << "Uncorrect choice!" << endl;
+			cout << "  Uncorrect choice!" << endl;
 			Sleep(1000);
 			system("cls");
 			break;
 		}
-
 	}
 	
 

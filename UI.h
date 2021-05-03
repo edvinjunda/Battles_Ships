@@ -41,27 +41,27 @@ public:
 void Menu::Visualize()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-	cout << setw(16) << "##############" << endl;
-	cout << setw(16) << "#SHIP BATTLES#" << endl;
-	cout << setw(16) << "##############" << endl;
+	cout << "  ##############" << endl;
+	cout << "  #SHIP BATTLES#" << endl;
+	cout << "  ##############" << endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
-	cout << setw(5) << "1. ";
+	cout <<"  1. ";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 	cout << "Play" << endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
-	cout << setw(5) << "2. ";
+	cout <<"  2. ";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	cout<<"Game guide" << endl;
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-	cout << setw(5) << "3. ";
+	cout <<"  3. ";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	cout << "History" << endl;
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-	cout << setw(30) <<"To exit press ESC or enter 4" << endl; //28 simboliai
+	cout << "  To exit press ESC or enter 4" << endl; //28 simboliai
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
@@ -69,21 +69,22 @@ void Menu::Visualize()
 
 void Menu::Choose(Bot& bot, Player& player)
 {
+	system("cls");
 	while (true)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		cout << setw(18) << "################" << endl;
-		cout << setw(18) << "#SHIP PLACEMENT#" << endl;
-		cout << setw(18) << "################" << endl;
+		cout << "  ################" << endl;
+		cout << "  #SHIP PLACEMENT#" << endl;
+		cout << "  ################" << endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
-		cout << "If you want place ships ";
+		cout << "  If you want place ships ";
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		cout << "manually"; 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		cout<<", enter m / M" << endl;
 
-		cout << "If you want place ships ";
+		cout << "  If you want place ships ";
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		cout << "randomly";
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -107,7 +108,7 @@ void Menu::Choose(Bot& bot, Player& player)
 		else
 		{
 			system("cls");
-			cout << "Enter valid letter!" << endl;
+			cout << "  Enter valid letter!" << endl;
 		}
 	}
 	++bot;
@@ -133,7 +134,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 			while (x < 1 || x>10 || y < 1 || y>10)
 			{
-				cout << "Choose coordinates between 0 and 9!" << endl;
+				cout << "  Choose coordinates between 0 and 9!" << endl;
 				player.Shoot(x, y);
 				UnvalidCoordinates(x, y);
 				x++;
@@ -159,10 +160,13 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 		if (bot.GetShipPoints() == 0)
 		{
 			cout << "  You won!" << endl;
+			cout << "  Your ship points:    " << player.GetShipPoints() << endl;
+			cout << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
+
 			ofstream history("History.txt", ios::app);
 
 			history << "  You won!" << endl;
-			history << "  Your ship points:	   " << player.GetShipPoints() << endl;
+			history << "  Your ship points:    " << player.GetShipPoints() << endl;
 			history << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
 
 			history.close();
@@ -177,7 +181,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 			visible_bot_field.ShowField();
 			player.ShowField();
 
-			cout << "Now it's enemy's turn to shoot!" << endl;
+			cout << "  Now it's enemy's turn to shoot!" << endl;
 			Sleep(2000);
 			bot.Shoot(x, y);
 			//cout << bot.GetHitValue() << " hit value" << endl;
@@ -198,10 +202,13 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 		if (player.GetShipPoints() == 0)
 		{
 			cout << "  You lost!" << endl;
+			cout << "  Your ship points:    " << player.GetShipPoints() << endl;
+			cout << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
+
 			ofstream history("History.txt", ios::app);
 			
 			history << "  You lost!" << endl;
-			history << "  Your ship points:	   " << player.GetShipPoints() << endl;
+			history << "  Your ship points:    " << player.GetShipPoints() << endl;
 			history << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
 
 			history.close();
@@ -212,8 +219,8 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 
 	cout << endl;
-	cout << "To get back to the menu press any key" << endl;
-	cout << "To exit the game press Esc" << endl;
+	cout << "  To get back to the menu press any key" << endl;
+	cout << "  To exit the game press Esc" << endl;
 
 	char choice;
 	choice = _getch();
@@ -265,11 +272,18 @@ void Files::Visualize()
 	choice = _getch();
 	if(choice =='r' || choice == 'R')
 	{
-		ofstream delete_hist("History.txt");
+		cout << "  To confirm press r / R once more" << endl;
+		cout << "  To exit history press any other key" << endl;
+		choice = _getch();
 
-		delete_hist << ' ';
+		if (choice == 'r' || choice == 'R')
+		{
+			ofstream delete_hist("History.txt");
 
-		delete_hist.close();
+			delete_hist << "";
+
+			delete_hist.close();
+		}
 	}
 }
 
@@ -295,7 +309,7 @@ void Files::GameGuide()
 
 	game_guide.close();
 
-	cout << "To exit game guide press any key" << endl;
+	cout << "  To exit game guide press any key" << endl;
 
 	char choice;
 	choice = _getch();

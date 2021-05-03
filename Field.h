@@ -54,16 +54,19 @@ Field::~Field()
 
 void Field::ShowField()
 {
-	cout << ' ';
+	cout << "   ";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	for (int i = 0; i < 10; i++)
 		cout << ' ' << i;
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 	cout << ' ' << "x axis" << endl;
+
 
 	for (int i = 1; i < 11; i++)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-		cout << i - 1;
+		cout << "  " << i - 1;
 
 		for (int j = 1; j < 11; j++)
 		{
@@ -87,7 +90,9 @@ void Field::ShowField()
 		cout << '|' << endl;
 	}
 
-	cout << "y axis" << endl << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+	cout << "  y axis" << endl << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
 }
 
@@ -150,21 +155,35 @@ void Field::operator ++(int)
 
 	for (int j = 0; j < 4; j++)
 	{
-		//cout << "Ships generate from left to right or from top to bottom." << endl;
-		//cout << "If you want put ship horizontally, it will go rightwards from x y coordinates" << endl;
-		//cout << "If you want put ship vertically, it will go downwards from x y coordinates." << endl;
-		//cout << "Remember, place ships in a way to not collide them!" << endl;
-
 		for (int l = 0; l < ships; l++)
 		{
 			system("cls");
 			ShowField();
 			cout << endl;
 
-			cout << placed_ships << '/' << 10 << " ships placed." << endl;
-			cout << "Currently placing " << blocks << " blocks size ship." << endl;
-			cout << "In order to place ship horizontally, type h/H" << endl;
-			cout << "In order to place ship vertically, type v/V" << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+			cout << "  " << placed_ships;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+
+			cout << '/';
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+			cout << 10;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+
+			cout << " ships placed." << endl;
+
+
+			cout << "  Currently placing ";
+
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+			cout << blocks;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+
+			cout << " blocks size ship." << endl;
+
+
+			cout << "  In order to place ship horizontally, type h / H" << endl;
+			cout << "  In order to place ship vertically, type v / V" << endl;
 
 			char direction;
 			while (true)
@@ -174,7 +193,7 @@ void Field::operator ++(int)
 				direction = _getch();
 				if (direction == 'h' || direction == 'H')					//horizontal
 				{
-					cout << "Enter x and y coordinates: ";
+					cout << "  Enter x and y coordinates: ";
 					cin >> x >> y;
 
 					UnvalidHorizontalPlacement(x, y, blocks);
@@ -185,8 +204,8 @@ void Field::operator ++(int)
 					{
 						if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
 						{
-							cout << "Ship which you want to place will collide with another ship!" << endl;
-							cout << "Enter other coordinates: " << endl;
+							cout << "  Ship which you want to place will collide with another ship!" << endl;
+							cout << "  Enter other coordinates: " << endl;
 							cin >> x >> y;
 
 							UnvalidHorizontalPlacement(x, y, blocks);
@@ -207,7 +226,7 @@ void Field::operator ++(int)
 
 				else if (direction == 'v' || direction == 'V')					//vertical
 				{
-					cout << "Enter x and y coordinates: ";
+					cout << "  Enter x and y coordinates: ";
 					cin >> x >> y;
 
 					UnvalidVerticalPlacement(x, y, blocks);
@@ -218,8 +237,8 @@ void Field::operator ++(int)
 					{
 						if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
 						{
-							cout << "Ship which you want to place will collide with another ship!" << endl;
-							cout << "Enter other coordinates: " << endl;
+							cout << "  Ship which you want to place will collide with another ship!" << endl;
+							cout << "  Enter other coordinates: " << endl;
 							cin >> x >> y;
 
 							UnvalidVerticalPlacement(x, y, blocks);
@@ -239,7 +258,7 @@ void Field::operator ++(int)
 
 				else
 				{
-					cout << "Enter correct direction!" << endl;
+					cout << "  Enter correct direction!" << endl;
 				}
 			}
 			placed_ships++;
@@ -248,7 +267,7 @@ void Field::operator ++(int)
 		blocks--;
 	}
 
-	cout << "Pleas wait few seconds, preparation of match is going on." << endl;
+	cout << "  Pleas wait few seconds, preparation of match is going on." << endl;
 	Sleep(3000);
 
 }
@@ -262,7 +281,7 @@ void Field::UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 		{
 			IgnoreLine();
 
-			cout << "Enter valid coordinates!" << endl;
+			cout << "  Enter valid coordinates! ";
 			cin >> x >> y;
 		}
 		else
@@ -278,7 +297,7 @@ void Field::UnvalidVerticalPlacement(int& x, int& y, int blocks)
 		{
 			IgnoreLine();
 
-			cout << "Enter valid coordinates!" << endl;
+			cout << "  Enter valid coordinates! ";
 			cin >> x >> y;
 		}
 		else
