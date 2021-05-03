@@ -12,3 +12,4 @@ const char* ship_placement = "  If you want place ships ";
 const char* back_to_menu = "  To get back to the menu press any key";
 const char* history_file = "History.txt";
 
+const int after_shot_sleep_time = 2000;

@@ -60,7 +60,6 @@ public:
 	char GetShootingDirection();
 	void GetShot(int x, int y, Bot &clone, bool& one_more);
 	bool RepeatedShot(int x, int y);
-
 };
 
 void Bot::Shoot(int& x, int& y)
@@ -287,7 +286,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 
 		ship_points--;
 		cout << "  Good shot! Shoot again!" << endl;
-		Sleep(2000);
+		Sleep(after_shot_sleep_time);
 	}
 
 	else
@@ -296,7 +295,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 		field[y][x] = "O";
 		clone.field[y][x] = "O";
 		cout << "  You missed..." << endl;
-		Sleep(2000);
+		Sleep(after_shot_sleep_time);
 	}
 }
 
@@ -310,13 +309,14 @@ bool Bot::RepeatedShot(int x, int y)
 	return false;
 }
 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Player : public Entity
 {
 public:
 	void Shoot(int& x, int& y);
 	void GetShot(int x, int y, Bot& hit, bool& one_more);
-	bool RepeatedShot(int x, int y, Bot& hit);
+	bool UselessShot(int x, int y, Bot& hit);
 };
 
 void Player::Shoot(int& x, int& y)
@@ -424,7 +424,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 		ship_points--;
 		cout << "  You got hit by the enemy!" << endl;
-		Sleep(2000);
+		Sleep(after_shot_sleep_time);
 	}
 
 	else //if(field[y][x] == "~")
@@ -474,12 +474,12 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');
 		}
-		////////////////////////////////////////cout << "Enemy missed" << endl;
-		////////////////////////////////////////Sleep(2000);
+		cout << "  Enemy missed" << endl;
+		Sleep(after_shot_sleep_time);
 	}
 }
 
-bool Player::RepeatedShot(int x, int y, Bot& hit)
+bool Player::UselessShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
@@ -503,5 +503,31 @@ bool Player::RepeatedShot(int x, int y, Bot& hit)
 		}
 		return true;
 	}
+
+	for (int j = -1; j < 2; j++)
+	{
+		for (int i = -1; i < 2; i++)
+		{
+			if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue()==0)
+			{
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
+
+/*bool Player::UselessShot(int x, int y, Bot hit)
+{
+	
+	
+
+	if (true)
+	{
+
+	}
+
+	return false;
+}
+*/

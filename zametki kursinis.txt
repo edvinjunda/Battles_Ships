@@ -1,9 +1,6 @@
-TERAZ RABIC:
+TERAZ RABIC: algarytm pa katorym karabal nie budzie strylac bliska ubitych karablej
 
-potem: algarytm pa katorym karabal nie budzie strylac bliska ubitych karablej
-rasmatrec mechanizm strelby bota if hit == 4 (sluczajeca ze nie dabiwaje karabal)// wazmozna aszybki w ifie RepeatedShot metada w 495 eilute
-
-!!!!!nie zapomniec adkamentavac sleep i tekst Enemy missed! 475+ eilute
+potem: rasmatrec mechanizm strelby bota if hit == 4 (sluczajeca ze nie dabiwaje karabal)// wazmozna aszybki w ifie RepeatedShot metada w 495 eilute
 
 hit=0 -> stryla w lubuju toczku | 
 hit=1 -> bylo papadanije, dalej ugadywac |

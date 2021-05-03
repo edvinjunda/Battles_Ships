@@ -183,7 +183,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 			Sleep(2000);
 			bot.Shoot(x, y);
 			//cout << bot.GetHitValue() << " hit value" << endl;
-			while (player.RepeatedShot(x, y, bot))
+			while (player.UselessShot(x, y, bot))
 			{
 				//cout << bot.GetHitValue() <<" hit value"<< endl;
 				bot.Shoot(x, y);
