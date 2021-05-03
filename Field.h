@@ -6,6 +6,7 @@
 #include <time.h>
 #include <conio.h>
 #include "Utilities.h"
+#include "Constants.h"
 
 using namespace std;
 
@@ -193,7 +194,7 @@ void Field::operator ++(int)
 				direction = _getch();
 				if (direction == 'h' || direction == 'H')					//horizontal
 				{
-					cout << "  Enter x and y coordinates: ";
+					cout << x_y_coordinates;
 					cin >> x >> y;
 
 					UnvalidHorizontalPlacement(x, y, blocks);
@@ -204,8 +205,8 @@ void Field::operator ++(int)
 					{
 						if (field[y + 1][i] == "#" || field[y][i] == "#" || field[y - 1][i] == "#")
 						{
-							cout << "  Ship which you want to place will collide with another ship!" << endl;
-							cout << "  Enter other coordinates: " << endl;
+							cout << ship_collision << endl;
+							cout << other_coordinates << endl;
 							cin >> x >> y;
 
 							UnvalidHorizontalPlacement(x, y, blocks);
@@ -226,7 +227,7 @@ void Field::operator ++(int)
 
 				else if (direction == 'v' || direction == 'V')					//vertical
 				{
-					cout << "  Enter x and y coordinates: ";
+					cout << x_y_coordinates;
 					cin >> x >> y;
 
 					UnvalidVerticalPlacement(x, y, blocks);
@@ -237,8 +238,8 @@ void Field::operator ++(int)
 					{
 						if (field[i][x - 1] == "#" || field[i][x] == "#" || field[i][x + 1] == "#")
 						{
-							cout << "  Ship which you want to place will collide with another ship!" << endl;
-							cout << "  Enter other coordinates: " << endl;
+							cout << ship_collision << endl;
+							cout << other_coordinates << endl;
 							cin >> x >> y;
 
 							UnvalidVerticalPlacement(x, y, blocks);
@@ -281,7 +282,7 @@ void Field::UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 		{
 			IgnoreLine();
 
-			cout << "  Enter valid coordinates! ";
+			cout << valid_coordinates;
 			cin >> x >> y;
 		}
 		else
@@ -297,7 +298,7 @@ void Field::UnvalidVerticalPlacement(int& x, int& y, int blocks)
 		{
 			IgnoreLine();
 
-			cout << "  Enter valid coordinates! ";
+			cout << valid_coordinates;
 			cin >> x >> y;
 		}
 		else

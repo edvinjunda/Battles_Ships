@@ -1,13 +1,8 @@
 ﻿// kursinis.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 ////
-#include <string>
 #include <stdlib.h>
 #include <fstream>
-#include <typeinfo>
-#include <limits>
-#include <cmath>
-#include <iomanip>
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
@@ -36,29 +31,38 @@ int main()
 		char option;
 		option = _getch();
 
-		switch (option)
+		try
 		{
-		case '1':
-			menu->Choose(bot,player);
-			menu->Play(bot,visible_bot_field,player);
-			break;
-		case '2':
-			file->GameGuide();
-			break;
-		case '3':
-			ui[1]->Visualize();
-			break;
-		case '4':
-			exit(0);
-			break;
-		case 27:
-			exit(0);
-			break;
-		default:
-			cout << "  Uncorrect choice!" << endl;
-			Sleep(1000);
-			system("cls");
-			break;
+			switch (option)
+			{
+			case '1':
+				menu->Choose(bot,player);
+				menu->Play(bot,visible_bot_field,player);
+				break;
+			case '2':
+				file->GameGuide();
+				break;
+			case '3':
+				ui[1]->Visualize();
+				break;
+			case '4':
+				exit(0);
+				break;
+			case 27:
+				exit(0);
+				break;
+			default:
+				cout << "  Uncorrect choice!" << endl;
+				Sleep(1000);
+				system("cls");
+				break;
+			}
+		}
+		catch (const char* error)
+		{
+			cout << error << endl;
+			cout << "  ";
+			system("pause");
 		}
 	}
 	

@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <fstream>
-#include <typeinfo>
-#include <limits>
-#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <Windows.h>
@@ -14,6 +11,7 @@
 #include "Field.h"
 #include "Entity.h"
 #include "Utilities.h"
+#include "Constants.h"
 
 using namespace std;
 
@@ -78,13 +76,13 @@ void Menu::Choose(Bot& bot, Player& player)
 		cout << "  ################" << endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
-		cout << "  If you want place ships ";
+		cout << ship_placement;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		cout << "manually"; 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		cout<<", enter m / M" << endl;
 
-		cout << "  If you want place ships ";
+		cout << ship_placement;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		cout << "randomly";
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -159,15 +157,15 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 		if (bot.GetShipPoints() == 0)
 		{
-			cout << "  You won!" << endl;
-			cout << "  Your ship points:    " << player.GetShipPoints() << endl;
-			cout << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
+			cout << won << endl;
+			cout << player_ship_points << player.GetShipPoints() << endl;
+			cout << enemy_ship_points << bot.GetShipPoints() << endl;
 
-			ofstream history("History.txt", ios::app);
+			ofstream history(history_file, ios::app);
 
-			history << "  You won!" << endl;
-			history << "  Your ship points:    " << player.GetShipPoints() << endl;
-			history << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
+			history << won << endl;
+			history << player_ship_points << player.GetShipPoints() << endl;
+			history << enemy_ship_points << bot.GetShipPoints() << endl;
 
 			history.close();
 
@@ -201,15 +199,15 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 		if (player.GetShipPoints() == 0)
 		{
-			cout << "  You lost!" << endl;
-			cout << "  Your ship points:    " << player.GetShipPoints() << endl;
-			cout << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
+			cout << lost << endl;
+			cout << player_ship_points << player.GetShipPoints() << endl;
+			cout << enemy_ship_points << bot.GetShipPoints() << endl;
 
-			ofstream history("History.txt", ios::app);
+			ofstream history(history_file, ios::app);
 			
-			history << "  You lost!" << endl;
-			history << "  Your ship points:    " << player.GetShipPoints() << endl;
-			history << "  Enemy's ship points: " << bot.GetShipPoints() << endl;
+			history << lost << endl;
+			history << player_ship_points << player.GetShipPoints() << endl;
+			history << enemy_ship_points << bot.GetShipPoints() << endl;
 
 			history.close();
 
@@ -219,7 +217,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 
 	cout << endl;
-	cout << "  To get back to the menu press any key" << endl;
+	cout << back_to_menu << endl;
 	cout << "  To exit the game press Esc" << endl;
 
 	char choice;
@@ -243,7 +241,7 @@ public:
 
 void Files::Visualize()
 {
-	ifstream history("History.txt");
+	ifstream history(history_file);
 
 	string line;
 
@@ -251,7 +249,7 @@ void Files::Visualize()
 
 	if (history.good() == false)
 	{
-		cout << "  History file 'History.txt' doesn't exist!" << endl;
+		throw "  History file doesn't exist!";
 	}
 	else
 	{
@@ -266,14 +264,14 @@ void Files::Visualize()
 	cout << endl;
 	cout << endl;
 	cout << "  To delete history press r / R" << endl;
-	cout << "  To exit history press any other key" << endl;
+	cout << back_to_menu << endl;
 	
 	char choice;
 	choice = _getch();
 	if(choice =='r' || choice == 'R')
 	{
 		cout << "  To confirm press r / R once more" << endl;
-		cout << "  To exit history press any other key" << endl;
+		cout << back_to_menu << endl;
 		choice = _getch();
 
 		if (choice == 'r' || choice == 'R')
@@ -297,7 +295,7 @@ void Files::GameGuide()
 
 	if (game_guide.good() == false)
 	{
-		cout << "  Game guide file 'Game Guide.txt' doesn't exist!" << endl;
+		throw "  Game guide file doesn't exist!";
 	}
 	else
 	{
@@ -309,7 +307,8 @@ void Files::GameGuide()
 
 	game_guide.close();
 
-	cout << "  To exit game guide press any key" << endl;
+	cout << endl;
+	cout << back_to_menu << endl;
 
 	char choice;
 	choice = _getch();

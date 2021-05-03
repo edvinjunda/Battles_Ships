@@ -5,6 +5,7 @@
 #include <iostream>
 #include <conio.h>
 #include "Field.h"
+#include "Constants.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ public:
 	Entity();
 	virtual ~Entity();
 public:
-	//virtual void Shoot()=0;
+	virtual void Shoot(int& x, int& y)=0;
 	int GetShipPoints();
 	virtual void GetShot(int x, int y);
 };
@@ -321,7 +322,7 @@ public:
 void Player::Shoot(int& x, int& y)
 {
 	cout << "  Your turn to shoot!" << endl;
-	cout << "  Enter x and y coordinates: ";
+	cout << x_y_coordinates;
 	cin >> x >> y;
 }
 
@@ -416,7 +417,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetHitValue(0);
 				hit.SetAB(0, 0);
 				hit.SetShootingDirection('o');
-				throw "  Something went wrong at Entity.h 354 row 'else if (hit.GetHitValue() == 3)'";
+				throw "  Enemy's ships are defective";
 			}
 			
 		}
