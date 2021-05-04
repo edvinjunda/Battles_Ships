@@ -1,15 +1,10 @@
-TERAZ RABIC: algarytm pa katorym karabal nie budzie strylac bliska ubitych karablej
-
-potem: rasmatrec mechanizm strelby bota if hit == 4 (sluczajeca ze nie dabiwaje karabal)// wazmozna aszybki w ifie RepeatedShot metada w 495 eilute
+TERAZ RABIC: w kance probywac zrabic kab polnascju dabityje karabli byliby czerwonymi
 
 hit=0 -> stryla w lubuju toczku | 
 hit=1 -> bylo papadanije, dalej ugadywac |
 hit=2 -> bylo papadanije, ale dalej nie ugadal |
 hit=3 -> pradalzac strelbu |
 hit=4 -> strelac w apredzielonaje miejsce |
-
-
-w kance probywac zrabic kab polnascju dabityje karabli byliby czerwonymi
 
 
 nieudalos!!!!!!!wsie funkcyji i metady perapisac w addzielnyje faily

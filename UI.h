@@ -119,7 +119,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 	while (true)
 	{
-		do
+		/*do
 		{
 			system("cls");
 			visible_bot_field.ShowField();
@@ -171,6 +171,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 			break;
 		}
+		*/
 
 
 		do

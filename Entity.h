@@ -215,12 +215,15 @@ void Bot::Shoot(int& x, int& y)
 				x = a - checker;
 				break;
 			default:
-				throw "  Enemy's ships are defective";
 				direction = 'o';
 				break;
 			}
-			break;
 
+			cout << "shoot else if hit == 4" << endl;
+			cout << x << ' ' << y << ' ' << direction << endl;
+			system("pause");
+
+			break;
 		}
 
 		else
@@ -347,6 +350,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 		else
 		{
 			field[y][x] = "+";
+
 			if (hit.GetHitValue() == 0)
 			{
 				hit.SetHitValue(1);
@@ -361,8 +365,9 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			{
 				if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
 				{
-					/*cout << "3u" << endl;
-					system("pause");*/
+					//cout << "3u" << endl;///////////////////
+					//cout << x << ' ' << y << endl;///////////////////
+					//system("pause");///////////////////
 
 					hit.SetShootingDirection('d');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -372,8 +377,9 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 				else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][ x + 1] == "+"))
 				{
-					/*cout << "3r" << endl;
-					system("pause");*/
+					//cout << "3r" << endl;///////////////////
+					//cout << x << ' ' << y << endl;///////////////////
+					//system("pause");///////////////////
 
 					hit.SetShootingDirection('l');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -381,8 +387,9 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				}
 				else if (hit.GetShootingDirection() == 'd' && (field[y+1][x] == "O" || field[y+1][x] == "+"))
 				{
-					/*cout << "3d" << endl;
-					system("pause");*/
+					//cout << "3d" << endl;///////////////////
+					//cout << x << ' ' << y << endl;///////////////////
+					//system("pause");///////////////////
 
 					hit.SetShootingDirection('u');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -390,8 +397,9 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				}
 				else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
 				{
-					/*cout << "3l" << endl;
-					system("pause");*/
+					//cout << "3l" << endl;///////////////////
+					//cout << x << ' ' << y << endl;///////////////////
+					//system("pause");///////////////////
 
 					hit.SetShootingDirection('r');
 					hit.SetHitValue(4);//hit.SetHitValue(0);
@@ -400,8 +408,53 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 				else
 				{
-					/*cout << "3o" << endl;
-					system("pause");*/
+					//cout << "3o" << endl;///////////////////
+					//cout << x << ' ' << y << endl;///////////////////
+					//("pause");///////////////////
+					///////////////////////////////////////////////////////////////////////
+					///////////////////////////////////////////////////////////////////////
+					///////////////////////////////////////////////////////////////////////
+					/*if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
+					{
+						/*cout << "3u" << endl;
+						system("pause");*/
+/*
+						hit.SetShootingDirection('d');
+						hit.SetHitValue(4);//hit.SetHitValue(0);
+						hit.SetAB(x, y);//hit.SetAB(0, 0);
+
+					}
+
+					else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][x + 1] == "+"))
+					{
+						/*cout << "3r" << endl;
+						system("pause");*/
+/*
+						hit.SetShootingDirection('l');
+						hit.SetHitValue(4);//hit.SetHitValue(0);
+						hit.SetAB(x, y);//hit.SetAB(0, 0);
+					}
+					else if (hit.GetShootingDirection() == 'd' && (field[y + 1][x] == "O" || field[y + 1][x] == "+"))
+					{
+						/*cout << "3d" << endl;
+						system("pause");*/
+/*
+						hit.SetShootingDirection('u');
+						hit.SetHitValue(4);//hit.SetHitValue(0);
+						hit.SetAB(x, y);//hit.SetAB(0, 0);
+					}
+					else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
+					{
+						/*cout << "3l" << endl;
+						system("pause");*/
+/*
+						hit.SetShootingDirection('r');
+						hit.SetHitValue(4);//hit.SetHitValue(0);
+						hit.SetAB(x, y);//hit.SetAB(0, 0);
+					}
+*/					//////////////////////////////////////////////////////////////////////
+					// ///////////////////////////////////////////////////////////////////////
+					///////////////////////////////////////////////////////////////////////
 
 					hit.SetAB(x, y);
 				}
@@ -410,6 +463,10 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			else if(hit.GetHitValue()==4)
 			{
 				hit.SetHitValue(3);
+				hit.SetAB(x, y);
+				cout << "getshot else if hit == 4" << endl;///////////////////////
+				cout << x << ' ' << y << endl;///////////////////////
+				system("pause");///////////////////////
 			}
 
 			else
@@ -417,7 +474,6 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetHitValue(0);
 				hit.SetAB(0, 0);
 				hit.SetShootingDirection('o');
-				throw "  Enemy's ships are defective";
 			}
 			
 		}
@@ -427,55 +483,64 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 		Sleep(after_shot_sleep_time);
 	}
 
-	else //if(field[y][x] == "~")
+	else
 	{
-		one_more = 0;
-		field[y][x] = "O";
-		if (hit.GetHitValue() == 1)
+		if (hit.GetHitValue() == 4)
 		{
-			hit.SetHitValue(2);
-		}
-		else if(hit.GetHitValue() == 3)
-		{
-			hit.SetHitValue(4);//hit.SetHitValue(0);
-			switch (hit.GetShootingDirection())
-			{
-			case 'u':
-				hit.SetAB(x, y + 1);
-				hit.SetShootingDirection('d');
-				break;
-			case 'r':
-				hit.SetAB(x - 1, y);
-				hit.SetShootingDirection('l');
-				break;
-			case 'd':
-				hit.SetAB(x, y - 1);
-				hit.SetShootingDirection('u');
-				break;
-			case 'l':
-				hit.SetAB(x + 1, y);
-				hit.SetShootingDirection('r');
-				break;
-			default:
-				throw "  Enemy's ships are defective";
-				hit.SetAB(x, y);
-				hit.SetShootingDirection('o');
-				break;
-			}
-		}
+			//cout << 4444 << endl;
+			//system("pause");
 
-		else if (hit.GetHitValue() == 4)
-		{
-			/*cout << 4444 << endl;
-			system("pause");*/
-
-			field[y][x] = "~";
+			one_more = 1;
 			hit.SetHitValue(0);
-			hit.SetAB(0, 0);
+			hit.SetAB(0, 0);//////////////////////////////////////////////////hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');
 		}
-		cout << "  Enemy missed" << endl;
-		Sleep(after_shot_sleep_time);
+
+		else
+		{
+			one_more = 0;
+			field[y][x] = "O";
+
+			if (hit.GetHitValue() == 1)
+			{
+				hit.SetHitValue(2);
+			}
+			else if (hit.GetHitValue() == 3)
+			{
+				////cout << "else if hit == 3 miss (505+ row)" << endl;
+				//system("pause");
+
+				hit.SetHitValue(4);//hit.SetHitValue(0);
+
+				switch (hit.GetShootingDirection())
+				{
+				case 'u':
+					hit.SetAB(x, y + 1);
+					hit.SetShootingDirection('d');
+					break;
+				case 'r':
+					hit.SetAB(x - 1, y);
+					hit.SetShootingDirection('l');
+					break;
+				case 'd':
+					hit.SetAB(x, y - 1);
+					hit.SetShootingDirection('u');
+					break;
+				case 'l':
+					hit.SetAB(x + 1, y);
+					hit.SetShootingDirection('r');
+					break;
+				default:
+					throw "  Enemy's ships are defective";
+					hit.SetAB(x, y);
+					hit.SetShootingDirection('o');
+					break;
+				}
+			}
+
+			cout << "  Enemy missed" << endl;
+			Sleep(after_shot_sleep_time);
+		}
 	}
 }
 
@@ -485,8 +550,9 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 	{
 		if (hit.GetHitValue() == 3)
 		{
-			/*cout << "repeated " << 3 << endl;
-			system("pause");*/
+			//cout << "repeated " << 3 << endl;////////////////////////////
+		//	cout << x << ' ' << y << ' ' << hit.GetShootingDirection() << endl;////////////////////////////
+			//system("pause");////////////////////////////
 
 			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
@@ -494,40 +560,28 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 		}
 		else if (hit.GetHitValue() == 4 && field[y][x] == "O")
 		{
-			/*cout << "repeated " << 4 << endl;
-			system("pause");*/
+			//cout << "repeated " << 4 << endl;////////////////////////////
+			//system("pause");////////////////////////////
 
-			hit.SetHitValue(0); 
+			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');
 		}
 		return true;
 	}
 
-	for (int j = -1; j < 2; j++)
+	if(hit.GetHitValue() == 0)
 	{
-		for (int i = -1; i < 2; i++)
+		for (int j = -1; j < 2; j++)
 		{
-			if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue()==0)
+			for (int i = -1; i < 2; i++)
 			{
-				return true;
+				if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue() == 0)
+				{
+					return true;
+				}
 			}
 		}
 	}
-
 	return false;
 }
-
-/*bool Player::UselessShot(int x, int y, Bot hit)
-{
-	
-	
-
-	if (true)
-	{
-
-	}
-
-	return false;
-}
-*/
