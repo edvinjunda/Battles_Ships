@@ -1,3 +1,12 @@
-  If you want put ship horizontally, it will go rightwards from x y coordinates
-  If you want put ship vertically, it will go downwards from x y coordinates.
+  When putting ship horizontally, it will go rightwards from x y coordinates
+  When putting ship vertically, it will go downwards from x y coordinates.
   Remember, place ships in a way to not collide them!
+
+  This is how collision looks like:
+  
+  4 blocks ship collides with 2 blocks ship
+                #
+  ######    #####    ##
+                       ####
+
+  Ships have to be 1 block away from each other!

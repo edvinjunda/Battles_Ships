@@ -10,11 +10,11 @@
 
 using namespace std;
 
-
+//klase musio laukui generuoti, laivams randomiskai ir rankiniu budu isdestyti ir atvaizduoti lauka
 class Field
 {
 protected:
-	string** field;//[12][12];
+	string** field;//[12][12];		//masyvas musio laukui saugoti
 public:
 	Field();
 	virtual ~Field();
@@ -28,6 +28,7 @@ private:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//konstruktorius dinaminyje atmintyje musio lauko sukurimui
 Field::Field()
 {
 	field = new string * [12];
@@ -39,10 +40,8 @@ Field::Field()
 			field[i][j] = "~";
 
 	srand(time(NULL));
-
-	//field[3][6]="X";
-	//		y  x
 }
+//destruktorius dinamines atminties atlaisvinimui
 Field::~Field()
 {
 	for (int i = 0; i < 12; i++)
@@ -53,6 +52,7 @@ Field::~Field()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10
 
+//metodas musio lauku atvaizdavimui
 void Field::ShowField()
 {
 	cout << "   ";
@@ -97,6 +97,7 @@ void Field::ShowField()
 
 }
 
+//metodas randomiskam laivu isdestymui
 void Field::operator++()
 {
 	int ships = 1, blocks = 4;
@@ -150,6 +151,7 @@ void Field::operator++()
 	}
 }
 
+//metodas rankiniam laivu isdestymui
 void Field::operator ++(int)
 {
 	int ships = 1, blocks = 4, placed_ships = 0;
@@ -273,7 +275,7 @@ void Field::operator ++(int)
 
 }
 
-
+//privatus metodas patikrinti ar ivesti duomenys yra tinkami ir ar yra imanoma isdestyti laiva horizontaliai
 void Field::UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 {
 	while (true)
@@ -290,6 +292,7 @@ void Field::UnvalidHorizontalPlacement(int& x, int& y, int blocks)
 	}
 }
 
+//privatus metodas patikrinti ar ivesti duomenys yra tinkami ir ar yra imanoma isdestyti laiva horizontaliai
 void Field::UnvalidVerticalPlacement(int& x, int& y, int blocks)
 {
 	while (true)

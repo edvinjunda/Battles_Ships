@@ -5,12 +5,14 @@
 
 using namespace std;
 
+//funkcija trinanti ivesta reiksme su cin jeigu atsitiktu taip kad i int kazkas irasytu stringa
 void IgnoreLine()
 {
 	cin.clear(); // clear input buffer to restore cin to a usable state
 	cin.ignore(INT_MAX, '\n'); // ignore last input
 }
 
+//funkcija netinkamu koordinaciu ivedimo patikrinimui
 void UnvalidCoordinates(int& x, int& y)
 {
 	while (true)

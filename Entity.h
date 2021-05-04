@@ -10,27 +10,31 @@
 using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//bazine ir isvestine klase Entity, kuri paveldi Field klase
 class Entity : public Field
 {
 protected:
-	int ship_points;
+	int ship_points;	//taskai, kurie atspindi kiek yra like nepataikytu bloku
 public:
 	Entity();
-	virtual ~Entity();
+	virtual ~Entity(); 
 public:
-	virtual void Shoot(int& x, int& y)=0;
-	int GetShipPoints();
+	virtual void Shoot(int& x, int& y)=0;	//grynai virtuali funkcija saudimui
+	int GetShipPoints();					
 	virtual void GetShot(int x, int y);
 };
 
-Entity::Entity() :ship_points(20){}
+//konstruktorius, kuris nustato numatytus zaidejo ir boto taskus
+Entity::Entity() : ship_points(20){}
 Entity::~Entity(){}
 
+//metodas kuris paduoda taskus
 int Entity::GetShipPoints()
 {
 	return ship_points;
 }
 
+//virtualus metodas skirtas suviams gauti
 void Entity::GetShot(int x, int y)
 {
 	//cout << x <<' '<< y << endl;
@@ -43,14 +47,15 @@ void Entity::GetShot(int x, int y)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//isvestine, boto Bot klase, kuri paveldi bazine Entity klase
 class Bot : public Entity
 {
 private:
 	int a, b, hit, checker;
 	char direction;
 public:
-	Bot() : a(0), b(0), hit(0),checker(0),direction('o') {}
-	~Bot() {}
+	Bot();
+	~Bot();
 public:
 	void Shoot(int& x, int& y);
 	void SetHitValue(int h);
@@ -62,6 +67,10 @@ public:
 	bool RepeatedShot(int x, int y);
 };
 
+Bot::Bot() : a(0), b(0), hit(0), checker(0), direction('o') {}// x ir y koordinaciu alterntyvos, saudimo rezimo kintamasis, saudimo vietos nustatymo kintamasis, saudimo krypties kintamasis
+Bot::~Bot() {}
+
+//metodas boto saudimui
 void Bot::Shoot(int& x, int& y)
 {
 	while (true)
@@ -219,9 +228,9 @@ void Bot::Shoot(int& x, int& y)
 				break;
 			}
 
-			cout << "shoot else if hit == 4" << endl;
-			cout << x << ' ' << y << ' ' << direction << endl;
-			system("pause");
+			//cout << "shoot else if hit == 4" << endl;
+			//cout << x << ' ' << y << ' ' << direction << endl;
+			//system("pause");
 
 			break;
 		}
@@ -238,32 +247,38 @@ void Bot::Shoot(int& x, int& y)
 	
 }
 
+//metodas hit laukui nustatyti
 void Bot::SetHitValue(int h)
 {
 	hit = h;
 }
 
+//metodas a ir b laukams nustatyti
 void Bot::SetAB(int x, int y)
 {
 	a = x;
 	b = y;
 }
 
+//metodas saudimo krypties laukui nustatyti
 void Bot::SetShootingDirection(char d)
 {
 	direction = d;
 }
 
+//metodas hit lauko reiksmes padavimui
 int Bot::GetHitValue()
 {
 	return hit;
 }
 
+//metodas saudimo krypties lauko reiksmes padavimui
 char Bot::GetShootingDirection()
 {
 	return direction;
 }
 
+//metodas botui suviams gauti
 void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 {
 	if (field[y][x] == "#")
@@ -302,6 +317,7 @@ void Bot::GetShot(int x, int y, Bot &clone, bool& one_more)
 	}
 }
 
+//metodas patikrinimui ar zaidejas i atinkama vieta jau saude
 bool Bot::RepeatedShot(int x, int y)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
@@ -314,6 +330,7 @@ bool Bot::RepeatedShot(int x, int y)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//isvestine, zaidejo Player klase, kuri paveldi bazine Entity klase
 class Player : public Entity
 {
 public:
@@ -322,6 +339,7 @@ public:
 	bool UselessShot(int x, int y, Bot& hit);
 };
 
+//metodas zaidejo saudymui
 void Player::Shoot(int& x, int& y)
 {
 	cout << "  Your turn to shoot!" << endl;
@@ -329,6 +347,7 @@ void Player::Shoot(int& x, int& y)
 	cin >> x >> y;
 }
 
+//metodas zaidejui suviams gauti
 void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 {
 	if (field[y][x] == "#")
@@ -408,54 +427,6 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 
 				else
 				{
-					//cout << "3o" << endl;///////////////////
-					//cout << x << ' ' << y << endl;///////////////////
-					//("pause");///////////////////
-					///////////////////////////////////////////////////////////////////////
-					///////////////////////////////////////////////////////////////////////
-					///////////////////////////////////////////////////////////////////////
-					/*if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
-					{
-						/*cout << "3u" << endl;
-						system("pause");*/
-/*
-						hit.SetShootingDirection('d');
-						hit.SetHitValue(4);//hit.SetHitValue(0);
-						hit.SetAB(x, y);//hit.SetAB(0, 0);
-
-					}
-
-					else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][x + 1] == "+"))
-					{
-						/*cout << "3r" << endl;
-						system("pause");*/
-/*
-						hit.SetShootingDirection('l');
-						hit.SetHitValue(4);//hit.SetHitValue(0);
-						hit.SetAB(x, y);//hit.SetAB(0, 0);
-					}
-					else if (hit.GetShootingDirection() == 'd' && (field[y + 1][x] == "O" || field[y + 1][x] == "+"))
-					{
-						/*cout << "3d" << endl;
-						system("pause");*/
-/*
-						hit.SetShootingDirection('u');
-						hit.SetHitValue(4);//hit.SetHitValue(0);
-						hit.SetAB(x, y);//hit.SetAB(0, 0);
-					}
-					else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
-					{
-						/*cout << "3l" << endl;
-						system("pause");*/
-/*
-						hit.SetShootingDirection('r');
-						hit.SetHitValue(4);//hit.SetHitValue(0);
-						hit.SetAB(x, y);//hit.SetAB(0, 0);
-					}
-*/					//////////////////////////////////////////////////////////////////////
-					// ///////////////////////////////////////////////////////////////////////
-					///////////////////////////////////////////////////////////////////////
-
 					hit.SetAB(x, y);
 				}
 				
@@ -544,6 +515,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 	}
 }
 
+//metodas patikrinti ar botas jau saude i atitinkama vieta ir ar jam verta i konkrecia vieta sauti
 bool Player::UselessShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")

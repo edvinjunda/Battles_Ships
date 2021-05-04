@@ -15,19 +15,22 @@
 
 using namespace std;
 
+//bazine UI klase
 class UI
 {
 public:
 	UI(){}
 	virtual ~UI(){}
 public:
-	virtual void Visualize()=0;
+	virtual void Visualize()=0;		//grynai virtuali funkcija visokiems atvaizdavimams
 };
 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10
+
+//isvestine klase Menu, kuri paveldi UI klase
 class Menu : public UI
 {
 public:
@@ -36,6 +39,7 @@ public:
 	void Play(Bot& bot, Bot& visible_bot_field, Player& player);
 };
 
+//metodas menu puslapiui atvaizduoti
 void Menu::Visualize()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
@@ -65,6 +69,7 @@ void Menu::Visualize()
 
 }
 
+//metodas zaidejui pasirinkti laivu isdestymo tvarka
 void Menu::Choose(Bot& bot, Player& player)
 {
 	system("cls");
@@ -112,6 +117,7 @@ void Menu::Choose(Bot& bot, Player& player)
 	++bot;
 }
 
+//metodas pacio zaidimo procesui
 void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 {
 	int x, y;
@@ -119,7 +125,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 	while (true)
 	{
-		/*do
+		do
 		{
 			system("cls");
 			visible_bot_field.ShowField();
@@ -157,21 +163,24 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 		if (bot.GetShipPoints() == 0)
 		{
+			cout << endl;
 			cout << won << endl;
 			cout << player_ship_points << player.GetShipPoints() << endl;
 			cout << enemy_ship_points << bot.GetShipPoints() << endl;
+			cout << endl;
 
 			ofstream history(history_file, ios::app);
 
 			history << won << endl;
 			history << player_ship_points << player.GetShipPoints() << endl;
 			history << enemy_ship_points << bot.GetShipPoints() << endl;
+			history << endl;
 
 			history.close();
 
 			break;
 		}
-		*/
+		
 
 
 		do
@@ -200,15 +209,18 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 		if (player.GetShipPoints() == 0)
 		{
+			cout << endl;
 			cout << lost << endl;
 			cout << player_ship_points << player.GetShipPoints() << endl;
 			cout << enemy_ship_points << bot.GetShipPoints() << endl;
+			cout << endl;
 
 			ofstream history(history_file, ios::app);
 			
 			history << lost << endl;
 			history << player_ship_points << player.GetShipPoints() << endl;
 			history << enemy_ship_points << bot.GetShipPoints() << endl;
+			history << endl;
 
 			history.close();
 
@@ -232,6 +244,7 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//isvestine klase Files, kuri paveldi UI klase
 class Files : public UI
 {
 public:
@@ -240,6 +253,7 @@ public:
 
 };
 
+//metodas zaidimu istorijai pavaizduti
 void Files::Visualize()
 {
 	ifstream history(history_file);
@@ -286,6 +300,7 @@ void Files::Visualize()
 	}
 }
 
+//metodas trumpam gidui, apie laivu isdestyma, pavaizduoti
 void Files::GameGuide() 
 {
 	ifstream game_guide("Game Guide.txt");

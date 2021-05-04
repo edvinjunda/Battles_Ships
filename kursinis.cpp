@@ -17,9 +17,9 @@ int main()
 	ui[0] = new Menu;
 	ui[1] = new Files;
 
-	Menu* menu = dynamic_cast<Menu*>(ui[0]);
+	Menu* menu = dynamic_cast<Menu*>(ui[0]);		
 	Files* file = dynamic_cast<Files*>(ui[1]);
-	while (true)
+	while (true)								//begalinis ciklas zaidimo procesui leisti
 	{
 		system("cls");
 
@@ -28,12 +28,12 @@ int main()
 
 		ui[0]->Visualize();
 
-		char option;
+		char option;				//kintamasis pasirinkimo irasymui
 		option = _getch();
 
 		try
 		{
-			switch (option)
+			switch (option)			//swtichas metodams paleisti
 			{
 			case '1':
 				menu->Choose(bot,player);
@@ -58,7 +58,7 @@ int main()
 				break;
 			}
 		}
-		catch (const char* error)
+		catch (const char* error)		//isimtys kuri suveikia, kai nera istorijos arba zaidimo gido txt failo
 		{
 			cout << error << endl;
 			cout << "  ";

@@ -1,5 +1,6 @@
 #pragma once
 
+//tekstines konstantos
 const char* valid_coordinates = "  Enter valid coordinates! ";
 const char* x_y_coordinates = "  Enter x and y coordinates: ";
 const char* ship_collision = "  Ship which you want to place will collide with another ship!";
@@ -12,4 +13,5 @@ const char* ship_placement = "  If you want place ships ";
 const char* back_to_menu = "  To get back to the menu press any key";
 const char* history_file = "History.txt";
 
+//laiko tarpas po suviu ir pataikymu
 const int after_shot_sleep_time = 2000;

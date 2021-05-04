@@ -10,3 +10,7 @@
   You lost!
   Your ship points:    0
   Enemy's ship points: 20
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 1
+
