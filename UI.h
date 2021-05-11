@@ -25,8 +25,6 @@ public:
 	virtual void Visualize()=0;		//grynai virtuali funkcija visokiems atvaizdavimams
 };
 
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //blue id 9, red id 12, white id 15, yellow id 14, green id 10
 
@@ -63,7 +61,7 @@ void Menu::Visualize()
 	cout << "History" << endl;
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-	cout << "  To exit press ESC or enter 4" << endl; //28 simboliai
+	cout << "  To exit press ESC or enter 4" << endl;
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 
@@ -192,10 +190,8 @@ void Menu::Play(Bot& bot, Bot& visible_bot_field, Player& player)
 			cout << "  Now it's enemy's turn to shoot!" << endl;
 			Sleep(2000);
 			bot.Shoot(x, y);
-			//cout << bot.GetHitValue() << " hit value" << endl;
 			while (player.UselessShot(x, y, bot))
 			{
-				//cout << bot.GetHitValue() <<" hit value"<< endl;
 				bot.Shoot(x, y);
 			}
 

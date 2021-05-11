@@ -37,7 +37,6 @@ int Entity::GetShipPoints()
 //virtualus metodas skirtas suviams gauti
 void Entity::GetShot(int x, int y)
 {
-	//cout << x <<' '<< y << endl;
 	if(field[y][x]=="#")
 		field[y][x] = "+";
 	else
@@ -65,6 +64,7 @@ public:
 	char GetShootingDirection();
 	void GetShot(int x, int y, Bot &clone, bool& one_more);
 	bool RepeatedShot(int x, int y);
+	void ReverseDirection(int x, int y);
 };
 
 Bot::Bot() : a(0), b(0), hit(0), checker(0), direction('o') {}// x ir y koordinaciu alterntyvos, saudimo rezimo kintamasis, saudimo vietos nustatymo kintamasis, saudimo krypties kintamasis
@@ -77,9 +77,6 @@ void Bot::Shoot(int& x, int& y)
 	{
 		if (hit == 1)	
 		{
-
-			/*cout << 1 << endl;//////////////////////////////
-			cout << checker << " c" << endl;*/
 			checker = 0;
 			int shot = 0;
 			
@@ -136,39 +133,34 @@ void Bot::Shoot(int& x, int& y)
 
 		else if (hit == 2)		
 		{
-			/*cout << checker << " c" << endl;
-			cout << 2 << endl;*/
 			checker = 0;
 			hit = 1;
 			continue;
 		}
 		else if (hit == 3)		
 		{
-			/*cout << checker << " c" << endl;
-				cout << direction << endl;//////////////////////////////
-				Sleep(2000);*/
 			checker = 0;
 				if (direction == 'u' && b == 1)
 				{
-					hit=4;//SetHitValue(0);
+					hit=4;
 					direction='d';
 					continue;
 				}
 				else if (direction == 'r' && a == 10)
 				{
-					hit = 4;//SetHitValue(0);
+					hit = 4;
 					direction = 'l';
 					continue;
 				}
 				else if (direction == 'd' && b == 10)
 				{
-					hit = 4;//SetHitValue(0);
+					hit = 4;
 					direction = 'u';
 					continue;
 				}
 				else if (direction == 'l' && a == 1)
 				{
-					hit = 4;//SetHitValue(0);
+					hit = 4;
 					direction = 'r';
 					continue;
 				}
@@ -196,15 +188,12 @@ void Bot::Shoot(int& x, int& y)
 				break;
 
 			}
-			//system("pause");
 		break;
 		}
 
 		else if (hit == 4)
 		{
 		checker++;
-		/*cout << 4 << ' ' << checker << endl;
-		system("pause");*/
 			switch (direction)
 			{
 			case 'u':
@@ -228,10 +217,6 @@ void Bot::Shoot(int& x, int& y)
 				break;
 			}
 
-			//cout << "shoot else if hit == 4" << endl;
-			//cout << x << ' ' << y << ' ' << direction << endl;
-			//system("pause");
-
 			break;
 		}
 
@@ -244,7 +229,6 @@ void Bot::Shoot(int& x, int& y)
 			break;
 		}
 	}
-	
 }
 
 //metodas hit laukui nustatyti
@@ -328,6 +312,39 @@ bool Bot::RepeatedShot(int x, int y)
 	return false;
 }
 
+void Bot::ReverseDirection(int x, int y)
+{
+	switch (direction)
+	{
+	case 'u':
+		a = x;
+		b = y + 1;
+		direction = 'd';
+		break;
+	case 'r':
+		a = x-1;
+		b = y;
+		direction = 'l';
+		break;
+	case 'd':
+		a = x;
+		b = y - 1;
+		direction = 'u';
+		break;
+	case 'l':
+		a = x + 1;
+		b = y;
+		direction = 'r';
+		break;
+	default:
+		a = x;
+		b = y;
+		direction = 'o';
+		throw "  Enemy's ships are defective";
+		break;
+	}
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //isvestine, zaidejo Player klase, kuri paveldi bazine Entity klase
@@ -384,45 +401,29 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			{
 				if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
 				{
-					//cout << "3u" << endl;///////////////////
-					//cout << x << ' ' << y << endl;///////////////////
-					//system("pause");///////////////////
-
 					hit.SetShootingDirection('d');
-					hit.SetHitValue(4);//hit.SetHitValue(0);
-					hit.SetAB(x, y);//hit.SetAB(0, 0);
+					hit.SetHitValue(4);
+					hit.SetAB(x, y);
 					
 				}
 
 				else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][ x + 1] == "+"))
 				{
-					//cout << "3r" << endl;///////////////////
-					//cout << x << ' ' << y << endl;///////////////////
-					//system("pause");///////////////////
-
 					hit.SetShootingDirection('l');
-					hit.SetHitValue(4);//hit.SetHitValue(0);
-					hit.SetAB(x, y);//hit.SetAB(0, 0);
+					hit.SetHitValue(4);
+					hit.SetAB(x, y);
 				}
 				else if (hit.GetShootingDirection() == 'd' && (field[y+1][x] == "O" || field[y+1][x] == "+"))
 				{
-					//cout << "3d" << endl;///////////////////
-					//cout << x << ' ' << y << endl;///////////////////
-					//system("pause");///////////////////
-
 					hit.SetShootingDirection('u');
-					hit.SetHitValue(4);//hit.SetHitValue(0);
-					hit.SetAB(x, y);//hit.SetAB(0, 0);
+					hit.SetHitValue(4);
+					hit.SetAB(x, y);
 				}
 				else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
 				{
-					//cout << "3l" << endl;///////////////////
-					//cout << x << ' ' << y << endl;///////////////////
-					//system("pause");///////////////////
-
 					hit.SetShootingDirection('r');
-					hit.SetHitValue(4);//hit.SetHitValue(0);
-					hit.SetAB(x, y);//hit.SetAB(0, 0);
+					hit.SetHitValue(4);
+					hit.SetAB(x, y);
 				}
 
 				else
@@ -435,9 +436,6 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			{
 				hit.SetHitValue(3);
 				hit.SetAB(x, y);
-				cout << "getshot else if hit == 4" << endl;///////////////////////
-				cout << x << ' ' << y << endl;///////////////////////
-				system("pause");///////////////////////
 			}
 
 			else
@@ -458,12 +456,9 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 	{
 		if (hit.GetHitValue() == 4)
 		{
-			//cout << 4444 << endl;
-			//system("pause");
-
 			one_more = 1;
 			hit.SetHitValue(0);
-			hit.SetAB(0, 0);//////////////////////////////////////////////////hit.SetAB(0, 0);
+			hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');
 		}
 
@@ -478,35 +473,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			}
 			else if (hit.GetHitValue() == 3)
 			{
-				////cout << "else if hit == 3 miss (505+ row)" << endl;
-				//system("pause");
-
-				hit.SetHitValue(4);//hit.SetHitValue(0);
-
-				switch (hit.GetShootingDirection())
-				{
-				case 'u':
-					hit.SetAB(x, y + 1);
-					hit.SetShootingDirection('d');
-					break;
-				case 'r':
-					hit.SetAB(x - 1, y);
-					hit.SetShootingDirection('l');
-					break;
-				case 'd':
-					hit.SetAB(x, y - 1);
-					hit.SetShootingDirection('u');
-					break;
-				case 'l':
-					hit.SetAB(x + 1, y);
-					hit.SetShootingDirection('r');
-					break;
-				default:
-					throw "  Enemy's ships are defective";
-					hit.SetAB(x, y);
-					hit.SetShootingDirection('o');
-					break;
-				}
+				hit.SetHitValue(4);
+				hit.ReverseDirection(x, y);
 			}
 
 			cout << "  Enemy missed" << endl;
@@ -520,21 +488,20 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
-		if (hit.GetHitValue() == 3)
+		if (hit.GetHitValue() == 3 && field[y][x] == "O")
 		{
 			//cout << "repeated " << 3 << endl;////////////////////////////
 		//	cout << x << ' ' << y << ' ' << hit.GetShootingDirection() << endl;////////////////////////////
 			//system("pause");////////////////////////////
+			hit.SetHitValue(4);
+			hit.ReverseDirection(x, y);
 
-			hit.SetHitValue(0);
-			hit.SetAB(0, 0);
-			hit.SetShootingDirection('o');
+			
+			//hit.SetAB(x,y);
+			//hit.SetShootingDirection('o');
 		}
 		else if (hit.GetHitValue() == 4 && field[y][x] == "O")
 		{
-			//cout << "repeated " << 4 << endl;////////////////////////////
-			//system("pause");////////////////////////////
-
 			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');

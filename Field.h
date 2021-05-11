@@ -14,7 +14,7 @@ using namespace std;
 class Field
 {
 protected:
-	string** field;//[12][12];		//masyvas musio laukui saugoti
+	string** field;		//masyvas musio laukui saugoti
 public:
 	Field();
 	virtual ~Field();
@@ -63,7 +63,6 @@ void Field::ShowField()
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 	cout << ' ' << "x axis" << endl;
 
-
 	for (int i = 1; i < 11; i++)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
@@ -75,10 +74,10 @@ void Field::ShowField()
 			cout << '|';
 			if (field[i][j] == "~")												//vanduo
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
-			else if (field[i][j] == "#")										//laivo sveikoji dalis
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 			else if (field[i][j] == "O")										//nepataikymas
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			else if (field[i][j] == "#")										//laivo sveikoji dalis
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 			else if (field[i][j] == "+")									//pataikimas
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 			else if (field[i][j] == "X")										//sunaikinimas
@@ -192,7 +191,6 @@ void Field::operator ++(int)
 			while (true)
 			{
 				int x, y;
-				//cin >> direction;
 				direction = _getch();
 				if (direction == 'h' || direction == 'H')					//horizontal
 				{
@@ -209,6 +207,7 @@ void Field::operator ++(int)
 						{
 							cout << ship_collision << endl;
 							cout << other_coordinates << endl;
+							cout << "  ";
 							cin >> x >> y;
 
 							UnvalidHorizontalPlacement(x, y, blocks);
@@ -242,6 +241,7 @@ void Field::operator ++(int)
 						{
 							cout << ship_collision << endl;
 							cout << other_coordinates << endl;
+							cout << "  ";
 							cin >> x >> y;
 
 							UnvalidVerticalPlacement(x, y, blocks);

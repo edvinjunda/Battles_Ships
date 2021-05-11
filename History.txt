@@ -14,3 +14,27 @@
   Your ship points:    0
   Enemy's ship points: 1
 
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 1
+
+  You won!
+  Your ship points:    2
+  Enemy's ship points: 0
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 4
+
+  You won!
+  Your ship points:    8
+  Enemy's ship points: 0
+
+  You won!
+  Your ship points:    8
+  Enemy's ship points: 0
+
+  You won!
+  Your ship points:    1
+  Enemy's ship points: 0
+
