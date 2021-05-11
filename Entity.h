@@ -322,7 +322,7 @@ void Bot::ReverseDirection(int x, int y)
 		direction = 'd';
 		break;
 	case 'r':
-		a = x-1;
+		a = x - 1;
 		b = y;
 		direction = 'l';
 		break;
@@ -354,6 +354,7 @@ public:
 	void Shoot(int& x, int& y);
 	void GetShot(int x, int y, Bot& hit, bool& one_more);
 	bool UselessShot(int x, int y, Bot& hit);
+	bool NotSmartShot(int x, int y, Bot& hit);
 };
 
 //metodas zaidejo saudymui
@@ -488,11 +489,40 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
-		if (hit.GetHitValue() == 3 && field[y][x] == "O")
+		if (hit.GetHitValue() == 0)
+		{
+			for (int j = -1; j < 2; j++)
+			{
+				for (int i = -1; i < 2; i++)
+				{
+					if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue() == 0)
+					{
+						return true;
+					}
+				}
+			}
+		}
+	
+		else if (hit.GetHitValue() == 1)////////////////////
+		{
+			if (NotSmartShot(x, y, hit))
+			{
+				return true;
+			}
+
+		}
+
+		else if (hit.GetHitValue() == 3 && NotSmartShot(x, y, hit))/////////////////////
+		{
+				return true;
+		}
+
+		else if (hit.GetHitValue() == 3 && field[y][x] == "O")
 		{
 			//cout << "repeated " << 3 << endl;////////////////////////////
 		//	cout << x << ' ' << y << ' ' << hit.GetShootingDirection() << endl;////////////////////////////
 			//system("pause");////////////////////////////
+			
 			hit.SetHitValue(4);
 			hit.ReverseDirection(x, y);
 
@@ -509,18 +539,42 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 		return true;
 	}
 
-	if(hit.GetHitValue() == 0)
+	return false;
+}
+
+bool Player::NotSmartShot(int x, int y, Bot& hit)//////////////////////////
+{
+	if (y - 2 > 0)
 	{
-		for (int j = -1; j < 2; j++)
+		if (field[y - 2][x] == "+")
 		{
-			for (int i = -1; i < 2; i++)
-			{
-				if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue() == 0)
-				{
-					return true;
-				}
-			}
+			return true;
 		}
 	}
+
+	else if (x + 2 < 11)
+	{
+		if (field[y][x + 2] == "+")
+		{
+			return true;
+		}
+	}
+
+	else if (y + 2 < 11)
+	{
+		if (field[y + 2][x] == "+")
+		{
+			return true;
+		}
+	}
+
+	else if (x - 2 > 0)
+	{
+		if (field[y][x - 2] == "+")
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
