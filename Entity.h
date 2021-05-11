@@ -384,6 +384,7 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
 		}
+
 		else
 		{
 			field[y][x] = "+";
@@ -393,11 +394,13 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 				hit.SetHitValue(1);
 				hit.SetAB(x,y);
 			}
+
 			else if (hit.GetHitValue() == 1)
 			{
 				hit.SetHitValue(3);
 				hit.SetAB(x, y);
 			}
+
 			else if (hit.GetHitValue() == 3)
 			{
 				if (hit.GetShootingDirection() == 'u' && (field[y - 1][x] == "O" || field[y - 1][x] == "+"))
@@ -405,21 +408,22 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 					hit.SetShootingDirection('d');
 					hit.SetHitValue(4);
 					hit.SetAB(x, y);
-					
 				}
 
-				else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][ x + 1] == "+"))
+				else if (hit.GetShootingDirection() == 'r' && (field[y][x + 1] == "O" || field[y][x + 1] == "+"))
 				{
 					hit.SetShootingDirection('l');
 					hit.SetHitValue(4);
 					hit.SetAB(x, y);
 				}
-				else if (hit.GetShootingDirection() == 'd' && (field[y+1][x] == "O" || field[y+1][x] == "+"))
+
+				else if (hit.GetShootingDirection() == 'd' && (field[y + 1][x] == "O" || field[y + 1][x] == "+"))
 				{
 					hit.SetShootingDirection('u');
 					hit.SetHitValue(4);
 					hit.SetAB(x, y);
 				}
+
 				else if (hit.GetShootingDirection() == 'l' && (field[y][x - 1] == "O" || field[y][x - 1] == "+"))
 				{
 					hit.SetShootingDirection('r');
@@ -427,12 +431,97 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 					hit.SetAB(x, y);
 				}
 
+				/*if (hit.GetShootingDirection() == 'u')// && )//))//////
+				{
+					if (field[y - 1][x] == "O")
+					{
+						hit.SetShootingDirection('d');
+						hit.SetHitValue(4);
+						hit.SetAB(x, y);
+					}
+
+					else if (y - 2 > 0)
+					{
+						if (field[y - 2][x] == "+" || field[y - 2][x] == "X")
+						{
+							hit.SetShootingDirection('d');
+							hit.SetHitValue(4);
+							hit.SetAB(x, y);
+						}
+					}
+				}
+
+				else if (hit.GetShootingDirection() == 'r')// && )// || "))//////
+				{
+					if (field[y][x + 1] == "O")
+					{
+						hit.SetShootingDirection('l');
+						hit.SetHitValue(4);
+						hit.SetAB(x, y);
+					}
+
+					else if (x + 2 <11)
+					{
+						if (field[y][x + 2] == "+" || field[y][x + 2] == "X")
+						{
+							hit.SetShootingDirection('l');
+							hit.SetHitValue(4);
+							hit.SetAB(x, y);
+						}
+					}
+				}
+
+				else if (hit.GetShootingDirection() == 'd')// && )// || ))//////
+				{
+					if (field[y + 1][x] == "O")
+					{
+						hit.SetShootingDirection('u');
+						hit.SetHitValue(4);
+						hit.SetAB(x, y);
+					}
+
+					else if (y + 2 < 11)
+					{
+						if (field[y + 2][x] == "+" || field[y + 2][x] == "X")
+						{
+							hit.SetShootingDirection('u');
+							hit.SetHitValue(4);
+							hit.SetAB(x, y);
+						}
+					}
+				}
+
+				else if (hit.GetShootingDirection() == 'l')// && )// || ))//////
+				{
+					if (field[y][x - 1] == "O")
+					{
+						hit.SetShootingDirection('u');
+						hit.SetHitValue(4);
+						hit.SetAB(x, y);
+					}
+
+					else if (x - 2 > 0)
+					{
+						if (field[y][x - 2] == "+" || field[y][x - 2] == "X")
+						{
+							hit.SetShootingDirection('u');
+							hit.SetHitValue(4);
+							hit.SetAB(x, y);
+						}
+					}
+
+					hit.SetShootingDirection('r');
+					hit.SetHitValue(4);
+					hit.SetAB(x, y);
+				}*/
+
 				else
 				{
 					hit.SetAB(x, y);
 				}
 				
 			}
+
 			else if(hit.GetHitValue()==4)
 			{
 				hit.SetHitValue(3);
@@ -474,6 +563,8 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			}
 			else if (hit.GetHitValue() == 3)
 			{
+				cout << 3 << endl;
+				system("pause");
 				hit.SetHitValue(4);
 				hit.ReverseDirection(x, y);
 			}
@@ -489,92 +580,76 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 {
 	if (field[y][x] == "+" || field[y][x] == "X" || field[y][x] == "O")
 	{
-		if (hit.GetHitValue() == 0)
+		if (hit.GetHitValue() == 3 && field[y][x] == "O")
 		{
-			for (int j = -1; j < 2; j++)
-			{
-				for (int i = -1; i < 2; i++)
-				{
-					if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue() == 0)
-					{
-						return true;
-					}
-				}
-			}
-		}
-	
-		else if (hit.GetHitValue() == 1)////////////////////
-		{
-			if (NotSmartShot(x, y, hit))
-			{
-				return true;
-			}
-
-		}
-
-		else if (hit.GetHitValue() == 3 && NotSmartShot(x, y, hit))/////////////////////
-		{
-				return true;
-		}
-
-		else if (hit.GetHitValue() == 3 && field[y][x] == "O")
-		{
-			//cout << "repeated " << 3 << endl;////////////////////////////
-		//	cout << x << ' ' << y << ' ' << hit.GetShootingDirection() << endl;////////////////////////////
-			//system("pause");////////////////////////////
-			
 			hit.SetHitValue(4);
 			hit.ReverseDirection(x, y);
-
-			
-			//hit.SetAB(x,y);
-			//hit.SetShootingDirection('o');
 		}
+
 		else if (hit.GetHitValue() == 4 && field[y][x] == "O")
 		{
 			hit.SetHitValue(0);
 			hit.SetAB(0, 0);
 			hit.SetShootingDirection('o');
 		}
+
 		return true;
 	}
 
+	if (hit.GetHitValue() == 0)
+	{
+		for (int j = -1; j < 2; j++)
+		{
+			for (int i = -1; i < 2; i++)
+			{
+				if ((field[y + i][x + j] == "+" || field[y + i][x + j] == "X") && hit.GetHitValue() == 0)
+				{
+					return true;
+				}
+			}
+		}
+	}
+
+	/*else if (hit.GetHitValue() == 1)
+	{
+		cout << 1 << endl;
+		system("pause");
+		if (y - 2 > 0)
+		{
+			if (field[y - 2][x] == "+" || field[y - 2][x] == "X")
+			{
+				return true;
+			}
+		}
+
+		else if (x + 2 < 11)
+		{
+			if (field[y][x + 2] == "+" || field[y][x + 2] == "X")
+			{
+				return true;
+			}
+		}
+
+		else if (y + 2 < 11)
+		{
+			if (field[y + 2][x] == "+" || field[y + 2][x] == "X")
+			{
+				return true;
+			}
+		}
+
+		else if (x - 2 > 0)
+		{
+			if (field[y][x - 2] == "+" || field[y][x - 2] == "X")
+			{
+				return true;
+			}
+		}
+
+	}*/
+
 	return false;
 }
 
-bool Player::NotSmartShot(int x, int y, Bot& hit)//////////////////////////
-{
-	if (y - 2 > 0)
-	{
-		if (field[y - 2][x] == "+")
-		{
-			return true;
-		}
-	}
 
-	else if (x + 2 < 11)
-	{
-		if (field[y][x + 2] == "+")
-		{
-			return true;
-		}
-	}
 
-	else if (y + 2 < 11)
-	{
-		if (field[y + 2][x] == "+")
-		{
-			return true;
-		}
-	}
-
-	else if (x - 2 > 0)
-	{
-		if (field[y][x - 2] == "+")
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
