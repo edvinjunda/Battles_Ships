@@ -102,3 +102,7 @@
   Your ship points:    0
   Enemy's ship points: 2
 
+  You won!
+  Your ship points:    5
+  Enemy's ship points: 0
+

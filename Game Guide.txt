@@ -10,3 +10,6 @@
                        ####
 
   Ships have to be 1 block away from each other!
+
+  + displays hit
+  X displays that 1 block ship was shot

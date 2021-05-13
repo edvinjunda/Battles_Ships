@@ -1,9 +1,5 @@
-TERAZ RABIC: da piontka patescic strelbu bota i tady udalic kamentaryji, a igraka igrawuju czasc koda adkamencic w Play
-
 hit=0 -> stryla w lubuju toczku | 
 hit=1 -> bylo papadanije, dalej ugadywac |
 hit=2 -> bylo papadanije, ale dalej nie ugadal |
 hit=3 -> pradalzac strelbu |
 hit=4 -> strelac w apredzielonaje miejsce |
-
-wa wremia hit=3 dachodzit da miejsca gde uze strylawszy to nie strylaje w praciwapaloznuju storanu, mozna isprawic z ifam kali w rezymie 3 natalkiwajeca na promach w useless metadzie //niby paprawina
