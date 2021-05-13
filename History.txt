@@ -50,3 +50,55 @@
   Your ship points:    4
   Enemy's ship points: 0
 
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 20
+
+  You won!
+  Your ship points:    10
+  Enemy's ship points: 0
+
+  You lost!
+  Your ship points:    0
+  Enemy's ship points: 2
+

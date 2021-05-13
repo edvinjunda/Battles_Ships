@@ -431,90 +431,6 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 					hit.SetAB(x, y);
 				}
 
-				/*if (hit.GetShootingDirection() == 'u')// && )//))//////
-				{
-					if (field[y - 1][x] == "O")
-					{
-						hit.SetShootingDirection('d');
-						hit.SetHitValue(4);
-						hit.SetAB(x, y);
-					}
-
-					else if (y - 2 > 0)
-					{
-						if (field[y - 2][x] == "+" || field[y - 2][x] == "X")
-						{
-							hit.SetShootingDirection('d');
-							hit.SetHitValue(4);
-							hit.SetAB(x, y);
-						}
-					}
-				}
-
-				else if (hit.GetShootingDirection() == 'r')// && )// || "))//////
-				{
-					if (field[y][x + 1] == "O")
-					{
-						hit.SetShootingDirection('l');
-						hit.SetHitValue(4);
-						hit.SetAB(x, y);
-					}
-
-					else if (x + 2 <11)
-					{
-						if (field[y][x + 2] == "+" || field[y][x + 2] == "X")
-						{
-							hit.SetShootingDirection('l');
-							hit.SetHitValue(4);
-							hit.SetAB(x, y);
-						}
-					}
-				}
-
-				else if (hit.GetShootingDirection() == 'd')// && )// || ))//////
-				{
-					if (field[y + 1][x] == "O")
-					{
-						hit.SetShootingDirection('u');
-						hit.SetHitValue(4);
-						hit.SetAB(x, y);
-					}
-
-					else if (y + 2 < 11)
-					{
-						if (field[y + 2][x] == "+" || field[y + 2][x] == "X")
-						{
-							hit.SetShootingDirection('u');
-							hit.SetHitValue(4);
-							hit.SetAB(x, y);
-						}
-					}
-				}
-
-				else if (hit.GetShootingDirection() == 'l')// && )// || ))//////
-				{
-					if (field[y][x - 1] == "O")
-					{
-						hit.SetShootingDirection('u');
-						hit.SetHitValue(4);
-						hit.SetAB(x, y);
-					}
-
-					else if (x - 2 > 0)
-					{
-						if (field[y][x - 2] == "+" || field[y][x - 2] == "X")
-						{
-							hit.SetShootingDirection('u');
-							hit.SetHitValue(4);
-							hit.SetAB(x, y);
-						}
-					}
-
-					hit.SetShootingDirection('r');
-					hit.SetHitValue(4);
-					hit.SetAB(x, y);
-				}*/
-
 				else
 				{
 					hit.SetAB(x, y);
@@ -563,8 +479,6 @@ void Player::GetShot(int x, int y,Bot& hit,bool& one_more)
 			}
 			else if (hit.GetHitValue() == 3)
 			{
-				cout << 3 << endl;
-				system("pause");
 				hit.SetHitValue(4);
 				hit.ReverseDirection(x, y);
 			}
@@ -609,44 +523,6 @@ bool Player::UselessShot(int x, int y, Bot& hit)
 			}
 		}
 	}
-
-	/*else if (hit.GetHitValue() == 1)
-	{
-		cout << 1 << endl;
-		system("pause");
-		if (y - 2 > 0)
-		{
-			if (field[y - 2][x] == "+" || field[y - 2][x] == "X")
-			{
-				return true;
-			}
-		}
-
-		else if (x + 2 < 11)
-		{
-			if (field[y][x + 2] == "+" || field[y][x + 2] == "X")
-			{
-				return true;
-			}
-		}
-
-		else if (y + 2 < 11)
-		{
-			if (field[y + 2][x] == "+" || field[y + 2][x] == "X")
-			{
-				return true;
-			}
-		}
-
-		else if (x - 2 > 0)
-		{
-			if (field[y][x - 2] == "+" || field[y][x - 2] == "X")
-			{
-				return true;
-			}
-		}
-
-	}*/
 
 	return false;
 }

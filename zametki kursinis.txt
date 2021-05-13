@@ -1,8 +1,4 @@
-TERAZ RABIC: jesli hit=1 i bliska jest karabal, ano strylaje miezdu karablami, mozna skapirawac kod z hit=0 umnaj strelboj ir perarabic na hit=1 if// napisana i dla hit = 1 ir hit = 3, trebujet tescirowanija
-
-dabawic knopku wychada w menu z opcyji razpridzilenija karablej
-
-w kance probywac zrabic kab polnascju dabityje karabli byliby czerwonymi, eta najlepiej rabic w show field metadzie padawaja bota w widzie template
+TERAZ RABIC: da piontka patescic strelbu bota i tady udalic kamentaryji, a igraka igrawuju czasc koda adkamencic w Play
 
 hit=0 -> stryla w lubuju toczku | 
 hit=1 -> bylo papadanije, dalej ugadywac |
